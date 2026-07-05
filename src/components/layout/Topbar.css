@@ -1,0 +1,277 @@
+/* =====================================================
+   TOPBAR
+===================================================== */
+
+.topbar-wrapper{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    height:82px;
+
+    background:#FFFFFF;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 32px;
+
+    border-bottom:1px solid #ECEEF5;
+
+    box-shadow:
+
+    0 10px 30px rgba(15,23,42,.04);
+
+}
+
+/* =====================================================
+LEFT
+===================================================== */
+
+.topbar-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+
+.menu-btn{
+
+    width:48px !important;
+
+    height:48px !important;
+
+    border-radius:14px !important;
+
+    background:#F6F8FC !important;
+
+    transition:.3s !important;
+
+}
+
+.menu-btn:hover{
+
+    transform:scale(1.05);
+
+    background:#EEF2FF !important;
+
+}
+
+.page-title{
+
+    font-size:28px !important;
+
+    font-weight:800 !important;
+
+    color:#111827;
+
+    letter-spacing:-1px;
+
+}
+
+.page-subtitle{
+
+    margin-top:4px !important;
+
+    color:#6B7280;
+
+    font-size:14px !important;
+
+}
+
+/* =====================================================
+SEARCH
+===================================================== */
+
+.search-box{
+
+    flex:1;
+
+    max-width:520px;
+
+    margin:0 40px;
+
+}
+
+.search-box .MuiOutlinedInput-root{
+
+    height:54px;
+
+    border-radius:16px;
+
+    background:#F8FAFC;
+
+}
+
+.search-box .MuiOutlinedInput-notchedOutline{
+
+    border:1px solid #E5E7EB;
+
+}
+
+.search-box .MuiOutlinedInput-root:hover
+.MuiOutlinedInput-notchedOutline{
+
+    border-color:#6366F1;
+
+}
+
+.search-box .Mui-focused
+.MuiOutlinedInput-notchedOutline{
+
+    border-width:2px;
+
+    border-color:#6366F1;
+
+}
+
+.search-shortcut{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:4px;
+
+    padding:4px 10px;
+
+    border-radius:10px;
+
+    background:#EEF2FF;
+
+    color:#6366F1;
+
+    font-weight:700;
+
+}
+
+/* =====================================================
+RIGHT
+===================================================== */
+
+.topbar-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+}
+
+.top-icon{
+
+    width:48px !important;
+
+    height:48px !important;
+
+    border-radius:14px !important;
+
+    background:#F8FAFC !important;
+
+    transition:.3s !important;
+
+}
+
+.top-icon:hover{
+
+    background:#EEF2FF !important;
+
+    transform:translateY(-2px);
+
+}
+
+.profile-box{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:8px 14px;
+
+    border-radius:16px;
+
+    background:#F8FAFC;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.profile-box:hover{
+
+    background:#EEF2FF;
+
+}
+
+.profile-name{
+
+    font-size:15px !important;
+
+    font-weight:700 !important;
+
+    color:#111827;
+
+}
+
+.profile-role{
+
+    font-size:13px !important;
+
+    color:#6B7280;
+
+}
+
+/* =====================================================
+RESPONSIVE
+===================================================== */
+
+@media(max-width:1100px){
+
+.search-box{
+
+display:none;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.topbar-wrapper{
+
+padding:0 16px;
+
+}
+
+.page-title{
+
+font-size:22px !important;
+
+}
+
+.profile-box{
+
+padding:6px 10px;
+
+}
+
+.profile-box .MuiTypography-root{
+
+display:none;
+
+}
+
+}

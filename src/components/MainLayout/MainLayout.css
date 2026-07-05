@@ -1,0 +1,85 @@
+/* =====================================
+LAYOUT
+===================================== */
+
+.layout{
+
+    display:flex;
+
+    background:#F6F8FC;
+
+    min-height:100vh;
+
+}
+
+/* =====================================
+CONTENT
+===================================== */
+
+.main-content{
+
+    flex:1;
+
+    margin-left:270px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    transition:.35s;
+
+}
+
+/* =====================================
+PAGE
+===================================== */
+
+.page-content{
+
+    flex:1;
+
+    padding:30px;
+
+    background:#F6F8FC;
+
+    overflow:auto;
+
+}
+
+/* =====================================
+SCROLLBAR
+===================================== */
+
+.page-content::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+.page-content::-webkit-scrollbar-thumb{
+
+    background:#D5D9E8;
+
+    border-radius:20px;
+
+}
+
+/* =====================================
+RESPONSIVE
+===================================== */
+
+@media(max-width:992px){
+
+.main-content{
+
+margin-left:0;
+
+}
+
+.page-content{
+
+padding:20px;
+
+}
+
+}

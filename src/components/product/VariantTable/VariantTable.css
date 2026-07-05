@@ -1,0 +1,342 @@
+/* ==========================================
+   BULK UPDATE CARD
+========================================== */
+
+.bulk-update-card {
+
+    margin-bottom: 30px;
+
+    padding: 28px;
+
+    border: 1px solid #eef2f7;
+
+    border-radius: 22px;
+
+    background: linear-gradient(
+        180deg,
+        #ffffff,
+        #fbfcff
+    );
+
+    box-shadow:
+        0 10px 30px rgba(15,23,42,.05);
+
+}
+
+.bulk-update-card h3{
+
+    margin:0 0 24px;
+
+    font-size:22px;
+
+    font-weight:700;
+
+    color:#111827;
+
+}
+
+/* ==========================================
+   BULK GRID
+========================================== */
+
+.bulk-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:24px;
+
+}
+
+.bulk-item{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+.bulk-item label{
+
+    font-size:14px;
+
+    font-weight:600;
+
+    color:#6b7280;
+
+}
+
+.bulk-item input{
+
+    width:100%;
+
+    height:52px;
+
+    border:1px solid #dbe3ef;
+
+    border-radius:14px;
+
+    padding:0 16px;
+
+    font-size:15px;
+
+    outline:none;
+
+    transition:.3s;
+
+}
+
+.bulk-item input:focus{
+
+    border-color:#5b5fef;
+
+    box-shadow:
+        0 0 0 4px rgba(91,95,239,.08);
+
+}
+
+.bulk-item button{
+
+    height:48px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:linear-gradient(
+        135deg,
+        #5b5fef,
+        #7c3aed
+    );
+
+    color:#fff;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.bulk-item button:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 12px 25px rgba(91,95,239,.25);
+
+}
+
+/* ==========================================
+   TABLE
+========================================== */
+
+.variant-table-wrapper{
+
+    overflow-x:auto;
+
+    border:1px solid #eef2f7;
+
+    border-radius:22px;
+
+    background:#fff;
+
+    box-shadow:
+        0 10px 35px rgba(15,23,42,.05);
+
+}
+
+.variant-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    min-width:1200px;
+
+}
+
+.variant-table thead{
+
+    background:#f8faff;
+
+}
+
+.variant-table th{
+
+    padding:18px;
+
+    text-align:left;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    color:#374151;
+
+    border-bottom:1px solid #eef2f7;
+
+    white-space:nowrap;
+
+}
+
+.variant-table td{
+
+    padding:16px 18px;
+
+    border-bottom:1px solid #f1f5f9;
+
+    vertical-align:middle;
+
+}
+
+.variant-table tbody tr{
+
+    transition:.25s;
+
+}
+
+.variant-table tbody tr:hover{
+
+    background:#fafbff;
+
+}
+
+/* ==========================================
+   VARIANT NAME
+========================================== */
+
+.variant-name{
+
+    font-weight:700;
+
+    color:#111827;
+
+    min-width:170px;
+
+}
+
+/* ==========================================
+   INPUTS
+========================================== */
+
+.table-input{
+
+    width:110px;
+
+    height:42px;
+
+    border:1px solid #dbe3ef;
+
+    border-radius:12px;
+
+    padding:0 12px;
+
+    font-size:14px;
+
+    outline:none;
+
+    transition:.25s;
+
+}
+
+.table-input:focus{
+
+    border-color:#5b5fef;
+
+    box-shadow:
+        0 0 0 4px rgba(91,95,239,.08);
+
+}
+
+/* ==========================================
+   STATUS
+========================================== */
+
+.status-switch{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    color:#374151;
+
+}
+
+.status-switch input{
+
+    width:18px;
+
+    height:18px;
+
+    accent-color:#22c55e;
+
+    cursor:pointer;
+
+}
+
+/* ==========================================
+   SCROLLBAR
+========================================== */
+
+.variant-table-wrapper::-webkit-scrollbar{
+
+    height:10px;
+
+}
+
+.variant-table-wrapper::-webkit-scrollbar-thumb{
+
+    background:#d5dcf1;
+
+    border-radius:20px;
+
+}
+
+.variant-table-wrapper::-webkit-scrollbar-track{
+
+    background:#f8faff;
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:992px){
+
+.bulk-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.bulk-update-card{
+
+padding:20px;
+
+}
+
+.bulk-item button{
+
+width:100%;
+
+}
+
+}

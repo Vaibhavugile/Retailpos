@@ -1,0 +1,116 @@
+/* ==========================================
+   CATEGORY GRID
+========================================== */
+
+.category-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:25px;
+
+}
+
+/* ==========================================
+   FORM GROUP
+========================================== */
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+.form-group label{
+
+    font-size:15px;
+
+    font-weight:600;
+
+    color:#374151;
+
+}
+
+/* ==========================================
+   SELECT
+========================================== */
+
+.form-group select{
+
+    width:100%;
+
+    height:56px;
+
+    padding:0 18px;
+
+    border:1px solid #dbe3ef;
+
+    border-radius:16px;
+
+    background:#fff;
+
+    color:#111827;
+
+    font-size:15px;
+
+    outline:none;
+
+    transition:.3s;
+
+    cursor:pointer;
+
+    appearance:none;
+
+    -webkit-appearance:none;
+
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='%236B7280' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+
+    background-repeat:no-repeat;
+
+    background-position:right 18px center;
+
+}
+
+.form-group select:hover{
+
+    border-color:#5B5FEF;
+
+}
+
+.form-group select:focus{
+
+    border-color:#5B5FEF;
+
+    box-shadow:
+        0 0 0 4px rgba(91,95,239,.08);
+
+}
+
+.form-group select:disabled{
+
+    background:#f8fafc;
+
+    color:#9ca3af;
+
+    cursor:not-allowed;
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:768px){
+
+.category-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}

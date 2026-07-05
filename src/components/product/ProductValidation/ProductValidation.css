@@ -1,0 +1,115 @@
+/* ==========================================
+   VALIDATION LIST
+========================================== */
+
+.validation-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:16px;
+
+}
+
+/* ==========================================
+   VALIDATION ITEM
+========================================== */
+
+.validation-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 22px;
+
+    border:1px solid #eef2f7;
+
+    border-radius:18px;
+
+    background:#fff;
+
+    transition:.25s;
+
+}
+
+.validation-item:hover{
+
+    background:#fafbff;
+
+    transform:translateX(4px);
+
+}
+
+.validation-item span:first-child{
+
+    font-size:20px;
+
+}
+
+.validation-item span:last-child{
+
+    flex:1;
+
+    margin-left:16px;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    color:#111827;
+
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+.validation-footer{
+
+    margin-top:28px;
+
+    padding:18px;
+
+    border-radius:18px;
+
+    text-align:center;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    background:linear-gradient(
+        135deg,
+        #eef2ff,
+        #f8faff
+    );
+
+    border:1px solid #dde5ff;
+
+    color:#5b5fef;
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:768px){
+
+.validation-item{
+
+padding:16px;
+
+}
+
+.validation-footer{
+
+font-size:16px;
+
+}
+
+}

@@ -1,0 +1,245 @@
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.sidebar{
+
+    position:fixed;
+
+    left:0;
+    top:0;
+    bottom:0;
+
+    width:270px;
+
+    background:#FFFFFF;
+
+    border-right:1px solid #ECEEF5;
+
+    display:flex;
+
+    flex-direction:column;
+
+    transition:.35s;
+
+    z-index:1200;
+
+    box-shadow:
+    8px 0 35px rgba(20,20,50,.04);
+
+}
+
+.sidebar.collapsed{
+
+    width:88px;
+
+}
+
+/* =========================================
+LOGO
+========================================= */
+
+.sidebar-logo{
+
+    height:78px;
+
+    padding:0 22px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.sidebar-logo h5{
+
+    font-weight:800 !important;
+
+    color:#20254A;
+
+    letter-spacing:-1px;
+
+}
+
+.sidebar-logo button{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:12px;
+
+    transition:.3s;
+
+}
+
+.sidebar-logo button:hover{
+
+    background:#F4F6FB;
+
+}
+
+/* =========================================
+MENU
+========================================= */
+
+.sidebar-menu{
+
+    flex:1;
+
+    overflow:auto;
+
+    padding:20px 14px;
+
+}
+
+/* Scroll */
+
+.sidebar-menu::-webkit-scrollbar{
+
+    width:5px;
+
+}
+
+.sidebar-menu::-webkit-scrollbar-thumb{
+
+    background:#D8DCEC;
+
+    border-radius:10px;
+
+}
+
+/* =========================================
+HEADER
+========================================= */
+
+.sidebar-header{
+
+    font-size:12px !important;
+
+    color:#98A2B3;
+
+    font-weight:700 !important;
+
+    margin:22px 12px 10px;
+
+    letter-spacing:1px;
+
+}
+
+/* =========================================
+ITEM
+========================================= */
+
+.sidebar-item{
+
+    height:52px;
+
+    border-radius:16px !important;
+
+    margin-bottom:8px !important;
+
+    transition:.3s !important;
+
+    color:#495057 !important;
+
+}
+
+.sidebar-item .MuiListItemIcon-root{
+
+    min-width:46px;
+
+    color:#7A8199;
+
+}
+
+.sidebar-item .MuiTypography-root{
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+/* Hover */
+
+.sidebar-item:hover{
+
+    background:#F6F7FC !important;
+
+    transform:translateX(4px);
+
+}
+
+/* Active */
+
+.sidebar-item.active{
+
+    background:linear-gradient(
+    135deg,
+    #5B5FEF,
+    #7C3AED
+    ) !important;
+
+    color:#FFFFFF !important;
+
+    box-shadow:
+    0 12px 30px rgba(91,95,239,.28);
+
+}
+
+.sidebar-item.active .MuiListItemIcon-root{
+
+    color:#FFFFFF;
+
+}
+
+/* =========================================
+FOOTER
+========================================= */
+
+.sidebar-footer{
+
+    padding:20px;
+
+    border-top:1px solid #ECEEF5;
+
+    background:#FFFFFF;
+
+}
+
+.sidebar-footer .MuiTypography-root:first-child{
+
+    color:#1F2937;
+
+    font-weight:700;
+
+}
+
+.sidebar-footer .MuiTypography-root:last-child{
+
+    color:#8C93A8;
+
+}
+
+/* =========================================
+RESPONSIVE
+========================================= */
+
+@media(max-width:992px){
+
+.sidebar{
+
+    transform:translateX(-100%);
+
+}
+
+.sidebar.show{
+
+    transform:translateX(0);
+
+}
+
+}
