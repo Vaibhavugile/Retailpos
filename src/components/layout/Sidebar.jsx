@@ -86,9 +86,9 @@ export default function Sidebar() {
     },
 
     {
-      title: "Purchase Entry",
+      title: "Orders",
       icon: <ShoppingCartRounded />,
-      path: "/purchase",
+      path: "/orders",
     },
 
     {
