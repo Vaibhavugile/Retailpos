@@ -14,6 +14,7 @@ import MainLayout from "../components/MainLayout/MainLayout";
 import Categories from "../pages/Categories/Categories";
 import SubCategories from "../pages/Subcategories/SubCategories";
 import AddProduct from "../pages/Products/AddProduct";
+import InventoryDashboard from "../pages/Inventory/InventoryDashboard";
 export default function AppRoutes() {
   return (
     <BrowserRouter>
@@ -37,6 +38,10 @@ export default function AppRoutes() {
             path="/dashboard"
             element={<Dashboard />}
           /> */}
+          <Route
+    path="/inventory"
+    element={<InventoryDashboard />}
+/>
 
           <Route
             path="/categories"

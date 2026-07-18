@@ -1,0 +1,82 @@
+/* ==========================================
+   STATS GRID
+========================================== */
+
+.inventory-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+/* ==========================================
+   CARD
+========================================== */
+
+.stat-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all .25s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0,0,0,.08);
+}
+
+/* ==========================================
+   ICON
+========================================== */
+
+.stat-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: #eef4ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+}
+
+/* ==========================================
+   INFO
+========================================== */
+
+.stat-info {
+    flex: 1;
+}
+
+.stat-title {
+    display: block;
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.stat-info h2 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 700;
+    color: #111827;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 992px) {
+    .inventory-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .inventory-stats {
+        grid-template-columns: 1fr;
+    }
+}

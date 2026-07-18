@@ -78,7 +78,7 @@ export default function Sidebar() {
     {
       title: "Products",
       icon: <StoreRounded />,
-      path: "/products",
+      path: "/inventory",
     },
 
     {
