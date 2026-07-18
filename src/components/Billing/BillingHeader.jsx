@@ -1,15 +1,23 @@
 import "./BillingHeader.css";
 import { useEffect, useState } from "react";
 
-export default function BillingHeader() {
+export default function BillingHeader({
+  invoiceNumber = "",
+  cashierName = "Administrator",
+}) {
+
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
+
     const timer = setInterval(() => {
+
       setCurrentTime(new Date());
+
     }, 1000);
 
     return () => clearInterval(timer);
+
   }, []);
 
   const currentDate = currentTime.toLocaleDateString("en-IN", {
@@ -22,17 +30,19 @@ export default function BillingHeader() {
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
+    hour12: true,
   });
 
   return (
+
     <div className="billing-header">
 
       <div className="header-left">
 
-        <h1>🛒 POS Billing</h1>
+        <h1>🛒 Retail POS Billing</h1>
 
         <p>
-          Create invoices, scan products and complete sales.
+          Scan products, manage customers and complete sales quickly.
         </p>
 
       </div>
@@ -40,27 +50,57 @@ export default function BillingHeader() {
       <div className="header-right">
 
         <div className="header-card">
-          <span>Invoice</span>
-          <strong>#INV-100001</strong>
+
+          <span>Invoice No.</span>
+
+          <strong>
+
+            {invoiceNumber || "New Invoice"}
+
+          </strong>
+
         </div>
 
         <div className="header-card">
+
           <span>Date</span>
-          <strong>{currentDate}</strong>
+
+          <strong>
+
+            {currentDate}
+
+          </strong>
+
         </div>
 
         <div className="header-card">
+
           <span>Time</span>
-          <strong>{currentClock}</strong>
+
+          <strong>
+
+            {currentClock}
+
+          </strong>
+
         </div>
 
         <div className="header-card">
+
           <span>Cashier</span>
-          <strong>Administrator</strong>
+
+          <strong>
+
+            {cashierName}
+
+          </strong>
+
         </div>
 
       </div>
 
     </div>
+
   );
+
 }

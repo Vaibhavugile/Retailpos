@@ -1,34 +1,36 @@
 import "./BillSummary.css";
+import { calculateBill } from "../../utils/billingCalculator";
 
-export default function BillSummary({ cart }) {
+export default function BillSummary({
+  cart,
+  billingSettings,
+  billDiscount,
+  setBillDiscount,
+}) {
 
-  const totalItems = cart.length;
+  const currencySymbol =
+    billingSettings?.currencySymbol || "₹";
 
-  const totalQuantity = cart.reduce(
-    (sum, item) => sum + (item.qty || 0),
-    0
-  );
+  const discountEnabled =
+    billingSettings?.discountEnabled ?? true;
 
-  const subtotal = cart.reduce(
-    (sum, item) =>
-      sum + ((item.sellingPrice || 0) * (item.qty || 0)),
-    0
-  );
+  const gstEnabled =
+    billingSettings?.gstEnabled ?? false;
 
-  const discount = cart.reduce(
-    (sum, item) =>
-      sum + (item.discount || 0),
-    0
-  );
-
-  const gst = cart.reduce(
-    (sum, item) =>
-      sum + (item.gstAmount || 0),
-    0
-  );
-
-  const grandTotal =
-    subtotal - discount + gst;
+  const {
+    totalProducts,
+    totalQuantity,
+    subtotal,
+    discount,
+    gstPercentage,
+    gst,
+    taxableAmount,
+    grandTotal,
+  } = calculateBill({
+    cart,
+    billDiscount,
+    billingSettings,
+  });
 
   return (
 
@@ -36,43 +38,120 @@ export default function BillSummary({ cart }) {
 
       <div className="summary-header">
 
-        <h2>Bill Summary</h2>
+        <h2>🧾 Bill Summary</h2>
 
       </div>
 
       <div className="summary-row">
-        <span>Total Items</span>
-        <strong>{totalItems}</strong>
+
+        <span>Total Products</span>
+
+        <strong>{totalProducts}</strong>
+
       </div>
 
       <div className="summary-row">
+
         <span>Total Quantity</span>
+
         <strong>{totalQuantity}</strong>
+
       </div>
 
       <div className="summary-row">
+
         <span>Subtotal</span>
-        <strong>₹ {subtotal.toFixed(2)}</strong>
+
+        <strong>
+
+          {currencySymbol} {subtotal.toFixed(2)}
+
+        </strong>
+
       </div>
 
-      <div className="summary-row">
-        <span>Discount</span>
-        <strong>₹ {discount.toFixed(2)}</strong>
-      </div>
+      {discountEnabled && (
+
+        <div className="summary-row">
+
+          <span>Bill Discount</span>
+
+          <input
+            type="number"
+            className="discount-input"
+            min="0"
+            max={subtotal}
+            step="0.01"
+            value={billDiscount}
+            onChange={(e) =>
+              setBillDiscount(
+                Number(e.target.value) || 0
+              )
+            }
+          />
+
+        </div>
+
+      )}
+
+      {discountEnabled && (
+
+        <div className="summary-row">
+
+          <span>Discount Applied</span>
+
+          <strong className="discount">
+
+            - {currencySymbol} {discount.toFixed(2)}
+
+          </strong>
+
+        </div>
+
+      )}
 
       <div className="summary-row">
-        <span>GST</span>
-        <strong>₹ {gst.toFixed(2)}</strong>
+
+        <span>Taxable Amount</span>
+
+        <strong>
+
+          {currencySymbol} {taxableAmount.toFixed(2)}
+
+        </strong>
+
       </div>
+
+      {gstEnabled && (
+
+        <div className="summary-row">
+
+          <span>
+
+            GST ({gstPercentage}%)
+
+          </span>
+
+          <strong>
+
+            {currencySymbol} {gst.toFixed(2)}
+
+          </strong>
+
+        </div>
+
+      )}
 
       <div className="summary-divider"></div>
 
-      <div className="summary-row total">
+      <div className="summary-row grand-total">
 
         <span>Grand Total</span>
 
         <strong>
-          ₹ {grandTotal.toFixed(2)}
+
+          {currencySymbol} {grandTotal.toFixed(2)}
+
         </strong>
 
       </div>

@@ -5,45 +5,62 @@ export default function CartTable({
   setCart,
 }) {
 
+  const totalQty = cart.reduce(
+    (sum, item) => sum + item.qty,
+    0
+  );
+
   const increaseQty = (index) => {
 
-    const updatedCart = [...cart];
+    setCart((prev) =>
+      prev.map((item, i) => {
 
-    updatedCart[index].qty += 1;
+        if (i !== index) return item;
 
-    updatedCart[index].total =
-      updatedCart[index].qty *
-      updatedCart[index].sellingPrice;
+        if (item.qty >= item.stock) return item;
 
-    setCart(updatedCart);
+        return {
+          ...item,
+          qty: item.qty + 1,
+        };
+
+      })
+    );
 
   };
 
   const decreaseQty = (index) => {
 
-    const updatedCart = [...cart];
+    setCart((prev) => {
 
-    if (updatedCart[index].qty > 1) {
+      const item = prev[index];
 
-      updatedCart[index].qty -= 1;
+      if (item.qty === 1) {
 
-      updatedCart[index].total =
-        updatedCart[index].qty *
-        updatedCart[index].sellingPrice;
+        return prev.filter((_, i) => i !== index);
 
-      setCart(updatedCart);
+      }
 
-    }
+      return prev.map((item, i) =>
+
+        i === index
+          ? {
+              ...item,
+              qty: item.qty - 1,
+            }
+          : item
+
+      );
+
+    });
 
   };
 
   const removeItem = (index) => {
 
-    const updatedCart = cart.filter(
-      (_, i) => i !== index
+    setCart((prev) =>
+      prev.filter((_, i) => i !== index)
     );
-
-    setCart(updatedCart);
 
   };
 
@@ -59,9 +76,7 @@ export default function CartTable({
             🛒
           </div>
 
-          <h2>
-            Cart is Empty
-          </h2>
+          <h2>Cart is Empty</h2>
 
           <p>
             Search or scan a product to start billing.
@@ -81,16 +96,10 @@ export default function CartTable({
 
       <div className="cart-header">
 
-        <h2>
-
-          Billing Cart
-
-        </h2>
+        <h2>🛒 Billing Cart</h2>
 
         <span>
-
-          {cart.length} Items
-
+          {cart.length} Products | {totalQty} Qty
         </span>
 
       </div>
@@ -99,43 +108,51 @@ export default function CartTable({
 
         <div
           className="cart-item"
-          key={item.variantId || index}
+          key={item.variantId}
         >
 
           <img
+            className="cart-image"
             src={
               item.image ||
-              "https://placehold.co/70x70?text=No+Image"
+              "/images/no-image.png"
             }
             alt={item.productName}
-            className="cart-image"
           />
 
           <div className="cart-info">
 
-            <h3>
+            <h3>{item.productName}</h3>
 
-              {item.productName}
-
-            </h3>
-
-            <p>
-
-              {item.variantName}
-
-            </p>
+            <p>{item.variantName}</p>
 
             <small>
+              Product :
+              {" "}
+              {item.productCode}
+            </small>
 
+            <br />
+
+            <small>
               Barcode :
               {" "}
               {item.barcode}
+            </small>
 
+            <br />
+
+            <small>
+              Stock :
+              {" "}
+              {item.stock}
             </small>
 
             <div className="price-row">
 
-              ₹ {item.sellingPrice}
+              ₹
+              {" "}
+              {Number(item.sellingPrice).toFixed(2)}
 
             </div>
 
@@ -150,32 +167,34 @@ export default function CartTable({
                   decreaseQty(index)
                 }
               >
-
                 −
-
               </button>
 
               <span>
-
                 {item.qty}
-
               </span>
 
               <button
+                disabled={
+                  item.qty >= item.stock
+                }
                 onClick={() =>
                   increaseQty(index)
                 }
               >
-
                 +
-
               </button>
 
             </div>
 
             <div className="item-total">
 
-              ₹ {item.total}
+              ₹
+              {" "}
+              {(
+                item.qty *
+                item.sellingPrice
+              ).toFixed(2)}
 
             </div>
 
@@ -185,9 +204,7 @@ export default function CartTable({
                 removeItem(index)
               }
             >
-
               Remove
-
             </button>
 
           </div>
