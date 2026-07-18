@@ -1,6 +1,6 @@
 import "./BillingDashboard.css";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import BillingHeader from "../../components/Billing/BillingHeader";
 import CustomerCard from "../../components/Billing/CustomerCard";
@@ -10,6 +10,7 @@ import BillSummary from "../../components/Billing/BillSummary";
 import PaymentSection from "../../components/Billing/PaymentSection";
 
 import { getBillingSettings } from "../../services/billingSettingsService";
+import { calculateBill } from "../../utils/billingCalculator";
 
 export default function BillingDashboard() {
 
@@ -19,7 +20,6 @@ export default function BillingDashboard() {
 
   const [billDiscount, setBillDiscount] = useState(0);
 
-  // This will be populated after a successful sale
   const [invoiceNumber, setInvoiceNumber] = useState("");
 
   const [billingSettings, setBillingSettings] = useState({
@@ -44,7 +44,8 @@ export default function BillingDashboard() {
 
       try {
 
-        const settings = await getBillingSettings();
+        const settings =
+          await getBillingSettings();
 
         setBillingSettings(settings);
 
@@ -63,6 +64,42 @@ export default function BillingDashboard() {
 
   }, []);
 
+  const billSummary = useMemo(() => {
+
+    return calculateBill({
+
+      cart,
+
+      billDiscount,
+
+      billingSettings,
+
+    });
+
+  }, [
+
+    cart,
+
+    billDiscount,
+
+    billingSettings,
+
+  ]);
+
+  const handleSaleCompleted = (result) => {
+
+    setInvoiceNumber(
+      result.invoiceNumber
+    );
+
+    setCart([]);
+
+    setCustomer(null);
+
+    setBillDiscount(0);
+
+  };
+
   return (
 
     <div className="billing-page">
@@ -74,7 +111,7 @@ export default function BillingDashboard() {
 
       <div className="billing-container">
 
-        {/* LEFT SIDE */}
+        {/* LEFT */}
 
         <div className="billing-left">
 
@@ -90,7 +127,7 @@ export default function BillingDashboard() {
 
         </div>
 
-        {/* RIGHT SIDE */}
+        {/* RIGHT */}
 
         <div className="billing-right">
 
@@ -101,6 +138,7 @@ export default function BillingDashboard() {
 
           <BillSummary
             cart={cart}
+            billSummary={billSummary}
             billingSettings={billingSettings}
             billDiscount={billDiscount}
             setBillDiscount={setBillDiscount}
@@ -109,13 +147,9 @@ export default function BillingDashboard() {
           <PaymentSection
             cart={cart}
             customer={customer}
-            billDiscount={billDiscount}
-            billingSettings={billingSettings}
-            invoiceNumber={invoiceNumber}
-            setInvoiceNumber={setInvoiceNumber}
-            setCart={setCart}
-            setCustomer={setCustomer}
-            setBillDiscount={setBillDiscount}
+            billSummary={billSummary}
+            cashier="Administrator"
+            onSaleCompleted={handleSaleCompleted}
           />
 
         </div>

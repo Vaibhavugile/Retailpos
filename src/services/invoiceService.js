@@ -1,59 +1,50 @@
-import {
-  doc,
-  runTransaction,
-} from "firebase/firestore";
+import { doc } from "firebase/firestore";
 import { db } from "../firebase";
 
-export const generateInvoiceNumber = async () => {
+/**
+ * Returns the invoice settings document reference.
+ * Used inside checkoutService transaction.
+ */
+export const getInvoiceSettingsRef = () => {
 
-  const invoiceRef = doc(
+  return doc(
     db,
     "settings",
     "invoice"
   );
 
-  return await runTransaction(
-    db,
-    async (transaction) => {
+};
 
-      const snapshot =
-        await transaction.get(invoiceRef);
+/**
+ * Builds the next invoice number.
+ * This function DOES NOT write to Firestore.
+ * The checkout transaction will update lastNumber.
+ */
+export const buildNextInvoice = (
+  invoiceSettings
+) => {
 
-      if (!snapshot.exists()) {
+  const prefix =
+    invoiceSettings.prefix || "INV";
 
-        throw new Error(
-          "Invoice settings not found."
-        );
+  const padding =
+    invoiceSettings.padding || 6;
 
-      }
+  const nextNumber =
+    (invoiceSettings.lastNumber || 0) + 1;
 
-      const data = snapshot.data();
+  const invoiceNumber =
+    `${prefix}-${String(nextNumber).padStart(
+      padding,
+      "0"
+    )}`;
 
-      const prefix =
-        data.prefix || "INV";
+  return {
 
-      const padding =
-        data.padding || 6;
+    invoiceNumber,
 
-      const nextNumber =
-        (data.lastNumber || 0) + 1;
+    nextNumber,
 
-      transaction.update(
-        invoiceRef,
-        {
-          lastNumber: nextNumber,
-        }
-      );
-
-      return `${prefix}-${String(
-        nextNumber
-      ).padStart(
-        padding,
-        "0"
-      )}`;
-
-    }
-
-  );
+  };
 
 };

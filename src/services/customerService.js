@@ -1,15 +1,18 @@
 import {
   doc,
   getDoc,
-  setDoc,
-  updateDoc,
   serverTimestamp,
-  increment,
 } from "firebase/firestore";
+
 import { db } from "../firebase";
 
-// Search Customer
-export const getCustomerByMobile = async (mobile) => {
+/**
+ * Search customer
+ * Safe to use outside transaction.
+ */
+export const getCustomerByMobile = async (
+  mobile
+) => {
 
   const customerRef = doc(
     db,
@@ -17,89 +20,89 @@ export const getCustomerByMobile = async (mobile) => {
     mobile
   );
 
-  const snapshot = await getDoc(customerRef);
+  const snapshot =
+    await getDoc(customerRef);
 
   if (!snapshot.exists()) {
+
     return null;
+
   }
 
   return {
+
     id: snapshot.id,
+
+    exists: true,
+
     ...snapshot.data(),
+
   };
 
 };
 
-// Create Customer
-export const createCustomer = async ({
-  name,
+/**
+ * Customer document reference
+ */
+export const getCustomerRef = (
+  mobile
+) => {
+
+  return doc(
+    db,
+    "customers",
+    mobile
+  );
+
+};
+
+/**
+ * Build new customer document
+ */
+export const buildCustomerDocument = ({
   mobile,
+  name,
+  firstPurchaseAmount = 0,
 }) => {
 
-  const customerRef = doc(
-    db,
-    "customers",
-    mobile
-  );
+  return {
 
-  await setDoc(customerRef, {
-
-    name,
     mobile,
 
-    totalOrders: 0,
-    totalSpent: 0,
+    name,
+
+    totalOrders:
+      firstPurchaseAmount > 0 ? 1 : 0,
+
+    totalSpent:
+      firstPurchaseAmount,
 
     createdAt: serverTimestamp(),
+
     updatedAt: serverTimestamp(),
 
-  });
-
-  return mobile;
+  };
 
 };
+/**
+ * Build customer purchase update
+ */
+export const buildCustomerPurchaseUpdate = ({
+  customer,
+  billAmount,
+}) => {
 
-// Update Customer
-export const updateCustomer = async (
-  mobile,
-  data
-) => {
+  return {
 
-  const customerRef = doc(
-    db,
-    "customers",
-    mobile
-  );
+    totalOrders:
+      (customer.totalOrders || 0) + 1,
 
-  await updateDoc(customerRef, {
-
-    ...data,
-    updatedAt: serverTimestamp(),
-
-  });
-
-};
-
-// Update Purchase
-export const updateCustomerPurchase = async (
-  mobile,
-  billAmount
-) => {
-
-  const customerRef = doc(
-    db,
-    "customers",
-    mobile
-  );
-
-  await updateDoc(customerRef, {
-
-    totalOrders: increment(1),
-
-    totalSpent: increment(billAmount),
+    totalSpent:
+      (customer.totalSpent || 0) +
+      billAmount,
 
     updatedAt: serverTimestamp(),
 
-  });
+  };
 
 };
