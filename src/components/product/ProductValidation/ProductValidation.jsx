@@ -8,32 +8,23 @@ export default function ProductValidation({
       label: "Product Code",
       valid: product.productCode.trim() !== "",
     },
-
     {
       label: "Product Name",
       valid: product.name.trim() !== "",
     },
-
-    {
-      label: "Description",
-      valid: product.description.trim() !== "",
-    },
-
+   
     {
       label: "Category",
       valid: product.categoryId !== "",
     },
-
     {
       label: "Sub Category",
       valid: product.subCategoryId !== "",
     },
-
     {
       label: "Variants Generated",
       valid: product.variants.length > 0,
     },
-
     {
       label: "Purchase Price",
       valid:
@@ -42,7 +33,6 @@ export default function ProductValidation({
           (v) => Number(v.purchasePrice) >= 0
         ),
     },
-
     {
       label: "Selling Price",
       valid:
@@ -51,7 +41,6 @@ export default function ProductValidation({
           (v) => Number(v.sellingPrice) > 0
         ),
     },
-
     {
       label: "Stock",
       valid:
@@ -66,8 +55,7 @@ export default function ProductValidation({
     (item) => item.valid
   ).length;
 
-  const pending =
-    checks.length - completed;
+  const pending = checks.length - completed;
 
   return (
     <div className="product-card">
@@ -75,8 +63,8 @@ export default function ProductValidation({
         <h2>Product Validation</h2>
 
         <p>
-          Verify all required information
-          before saving the product.
+          Verify all required information before
+          saving the product.
         </p>
       </div>
 
@@ -84,10 +72,12 @@ export default function ProductValidation({
         {checks.map((item) => (
           <div
             key={item.label}
-            className="validation-item"
+            className={`validation-chip ${
+              item.valid ? "success" : "error"
+            }`}
           >
-            <span>
-              {item.valid ? "✅" : "❌"}
+            <span className="chip-icon">
+              {item.valid ? "✓" : "✕"}
             </span>
 
             <span>{item.label}</span>
@@ -97,14 +87,11 @@ export default function ProductValidation({
 
       <div className="validation-footer">
         {pending === 0 ? (
-          <>
-            ✅ Ready to Save Product
-          </>
+          <>✅ Ready to Save Product</>
         ) : (
           <>
-            {pending} Required
-            {pending > 1 ? " Fields" : " Field"}{" "}
-            Remaining
+            {completed}/{checks.length} Completed •{" "}
+            {pending} Remaining
           </>
         )}
       </div>

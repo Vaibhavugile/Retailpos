@@ -340,3 +340,24 @@ width:100%;
 }
 
 }
+/* ==========================================
+   DELETE VARIANT BUTTON
+========================================== */
+
+.delete-variant-btn {
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 10px;
+  background: #fee2e2;
+  color: #dc2626;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.25s ease;
+}
+
+.delete-variant-btn:hover {
+  background: #dc2626;
+  color: #ffffff;
+  transform: scale(1.08);
+}

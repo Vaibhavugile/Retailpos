@@ -32,6 +32,28 @@ const updateVariant = (
   }));
 };
 /* ===========================================
+    DELETE VARIANT
+=========================================== */
+
+const deleteVariant = (index) => {
+
+  const confirmed = window.confirm(
+    "Are you sure you want to delete this variant?"
+  );
+
+  if (!confirmed) return;
+
+  const variants = product.variants.filter(
+    (_, i) => i !== index
+  );
+
+  setProduct((prev) => ({
+    ...prev,
+    variants,
+  }));
+
+};
+/* ===========================================
     BULK UPDATE
 =========================================== */
 
@@ -102,6 +124,7 @@ const applyToAll = (field) => {
               <th>Low Stock</th>
 
               <th>Status</th>
+              <th>Actions</th>
 
             </tr>
 
@@ -219,6 +242,19 @@ const applyToAll = (field) => {
           </label>
 
         </td>
+        <td>
+
+  <button
+    type="button"
+    className="delete-variant-btn"
+    onClick={() =>
+      deleteVariant(index)
+    }
+  >
+    🗑
+  </button>
+
+</td>
 
       </tr>
 

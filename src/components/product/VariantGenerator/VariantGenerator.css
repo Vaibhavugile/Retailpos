@@ -176,3 +176,126 @@ width:100%;
 }
 
 }
+/* ==========================================
+   PREVIEW
+========================================== */
+
+.variant-preview {
+  margin-top: 30px;
+  padding: 22px;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  background: #fafafa;
+}
+
+.variant-preview h3 {
+  margin: 0 0 18px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.preview-empty {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.preview-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.preview-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  transition: all 0.25s ease;
+}
+
+.preview-item:hover {
+  border-color: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.08);
+}
+
+.preview-item span {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.remove-preview-btn {
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: #fee2e2;
+  color: #dc2626;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.remove-preview-btn:hover {
+  background: #dc2626;
+  color: #ffffff;
+  transform: rotate(90deg);
+}
+
+/* ==========================================
+   ADD VARIANTS BUTTON
+========================================== */
+
+.generate-btn {
+  width: 100%;
+  margin-top: 24px;
+  padding: 15px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.generate-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
+}
+
+.generate-btn:active {
+  transform: scale(0.98);
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 768px) {
+  .variant-preview {
+    padding: 18px;
+  }
+
+  .preview-item {
+    padding: 12px;
+  }
+
+  .preview-item span {
+    font-size: 14px;
+  }
+
+  .remove-preview-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+}

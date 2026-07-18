@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./VariantGenerator.css";
-
 export default function VariantGenerator({
   product,
   setProduct,
@@ -39,7 +38,8 @@ export default function VariantGenerator({
 
   const [availableSizes, setAvailableSizes] =
     useState(defaultSizes);
-
+const [previewVariants, setPreviewVariants] =
+  useState([]);
   const [newColor, setNewColor] =
     useState("");
 
@@ -159,6 +159,59 @@ export default function VariantGenerator({
 
     setNewSize("");
   };
+  useEffect(() => {
+  const colors = product.selectedColors || [];
+  const sizes = product.selectedSizes || [];
+
+  const preview = [];
+
+  if (!colors.length && !sizes.length) {
+    preview.push({
+      label: "Default",
+      attributes: {},
+    });
+  }
+  else if (colors.length && !sizes.length) {
+    colors.forEach((color) => {
+      preview.push({
+        label: color,
+        attributes: { Color: color },
+      });
+    });
+  }
+  else if (!colors.length && sizes.length) {
+    sizes.forEach((size) => {
+      preview.push({
+        label: size,
+        attributes: { Size: size },
+      });
+    });
+  }
+  else {
+    colors.forEach((color) => {
+      sizes.forEach((size) => {
+        preview.push({
+          label: `${color} / ${size}`,
+          attributes: {
+            Color: color,
+            Size: size,
+          },
+        });
+      });
+    });
+  }
+
+  setPreviewVariants(preview);
+
+}, [
+  product.selectedColors,
+  product.selectedSizes,
+]);
+const removePreviewVariant = (label) => {
+  setPreviewVariants((prev) =>
+    prev.filter((item) => item.label !== label)
+  );
+};
   /* ===========================================
     GENERATE VARIANTS
 =========================================== */
@@ -190,7 +243,7 @@ const generateVariants = () => {
 
   const existingVariants = product.variants || [];
 
-  let combinations = [];
+  const combinations = previewVariants;
 
   // No Color & No Size
   if (!colors.length && !sizes.length) {
@@ -326,31 +379,6 @@ setProduct((prev) => ({
     PREVIEW VARIANTS
 =========================================== */
 
-const previewVariants = [];
-
-const colors = product.selectedColors || [];
-const sizes = product.selectedSizes || [];
-
-if (!colors.length && !sizes.length) {
-  previewVariants.push("Default");
-}
-else if (colors.length && !sizes.length) {
-  colors.forEach((color) => {
-    previewVariants.push(color);
-  });
-}
-else if (!colors.length && sizes.length) {
-  sizes.forEach((size) => {
-    previewVariants.push(size);
-  });
-}
-else {
-  colors.forEach((color) => {
-    sizes.forEach((size) => {
-      previewVariants.push(`${color} / ${size}`);
-    });
-  });
-}
   return (
   <div className="product-card">
 
@@ -482,7 +510,7 @@ else {
       PREVIEW
 ======================= */}
 
-<div className="variant-preview">
+{/* <div className="variant-preview">
 
   <h3>
     Ready to Add ({previewVariants.length})
@@ -505,7 +533,21 @@ else {
           className="preview-item"
         >
 
-          <span>{variant}</span>
+         <div className="preview-item">
+
+  <span>{variant.label}</span>
+
+  <button
+    type="button"
+    className="remove-preview-btn"
+    onClick={() =>
+      removePreviewVariant(variant.label)
+    }
+  >
+    ✕
+  </button>
+
+</div>
 
         </div>
 
@@ -515,7 +557,7 @@ else {
 
   )}
 
-</div>
+</div> */}
 
       <button
         type="button"
