@@ -43,9 +43,9 @@ export default function AddProduct() {
 
       images: [],
 
-      hasVariants: false,
+      selectedColors: [],
 
-      attributes: [],
+selectedSizes: [],
 
       variants: [],
 

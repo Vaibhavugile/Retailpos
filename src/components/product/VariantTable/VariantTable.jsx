@@ -77,123 +77,7 @@ const applyToAll = (field) => {
         </div>
 
       </div>
-      <div className="bulk-update-card">
-
-  <h3>Bulk Update</h3>
-
-  <div className="bulk-grid">
-
-    {/* Purchase */}
-
-    <div className="bulk-item">
-
-      <label>Purchase Price</label>
-
-      <input
-        type="number"
-        value={bulk.purchasePrice}
-        onChange={(e) =>
-          setBulk({
-            ...bulk,
-            purchasePrice: e.target.value,
-          })
-        }
-      />
-
-      <button
-        onClick={() =>
-          applyToAll("purchasePrice")
-        }
-      >
-        Apply
-      </button>
-
-    </div>
-
-    {/* Selling */}
-
-    <div className="bulk-item">
-
-      <label>Selling Price</label>
-
-      <input
-        type="number"
-        value={bulk.sellingPrice}
-        onChange={(e) =>
-          setBulk({
-            ...bulk,
-            sellingPrice: e.target.value,
-          })
-        }
-      />
-
-      <button
-        onClick={() =>
-          applyToAll("sellingPrice")
-        }
-      >
-        Apply
-      </button>
-
-    </div>
-
-    {/* Stock */}
-
-    <div className="bulk-item">
-
-      <label>Stock</label>
-
-      <input
-        type="number"
-        value={bulk.stock}
-        onChange={(e) =>
-          setBulk({
-            ...bulk,
-            stock: e.target.value,
-          })
-        }
-      />
-
-      <button
-        onClick={() =>
-          applyToAll("stock")
-        }
-      >
-        Apply
-      </button>
-
-    </div>
-
-    {/* Low Stock */}
-
-    <div className="bulk-item">
-
-      <label>Low Stock</label>
-
-      <input
-        type="number"
-        value={bulk.lowStock}
-        onChange={(e) =>
-          setBulk({
-            ...bulk,
-            lowStock: e.target.value,
-          })
-        }
-      />
-
-      <button
-        onClick={() =>
-          applyToAll("lowStock")
-        }
-      >
-        Apply
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
+  
 
       <div className="variant-table-wrapper">
 
@@ -346,6 +230,123 @@ const applyToAll = (field) => {
         </table>
 
       </div>
+          <div className="bulk-update-card">
+
+  <h3>Bulk Update</h3>
+
+  <div className="bulk-grid">
+
+    {/* Purchase */}
+
+    <div className="bulk-item">
+
+      <label>Purchase Price</label>
+
+      <input
+        type="number"
+        value={bulk.purchasePrice}
+        onChange={(e) =>
+          setBulk({
+            ...bulk,
+            purchasePrice: e.target.value,
+          })
+        }
+      />
+
+      <button
+        onClick={() =>
+          applyToAll("purchasePrice")
+        }
+      >
+        Apply
+      </button>
+
+    </div>
+
+    {/* Selling */}
+
+    <div className="bulk-item">
+
+      <label>Selling Price</label>
+
+      <input
+        type="number"
+        value={bulk.sellingPrice}
+        onChange={(e) =>
+          setBulk({
+            ...bulk,
+            sellingPrice: e.target.value,
+          })
+        }
+      />
+
+      <button
+        onClick={() =>
+          applyToAll("sellingPrice")
+        }
+      >
+        Apply
+      </button>
+
+    </div>
+
+    {/* Stock */}
+
+    <div className="bulk-item">
+
+      <label>Stock</label>
+
+      <input
+        type="number"
+        value={bulk.stock}
+        onChange={(e) =>
+          setBulk({
+            ...bulk,
+            stock: e.target.value,
+          })
+        }
+      />
+
+      <button
+        onClick={() =>
+          applyToAll("stock")
+        }
+      >
+        Apply
+      </button>
+
+    </div>
+
+    {/* Low Stock */}
+
+    <div className="bulk-item">
+
+      <label>Low Stock</label>
+
+      <input
+        type="number"
+        value={bulk.lowStock}
+        onChange={(e) =>
+          setBulk({
+            ...bulk,
+            lowStock: e.target.value,
+          })
+        }
+      />
+
+      <button
+        onClick={() =>
+          applyToAll("lowStock")
+        }
+      >
+        Apply
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
 
     </div>
   );

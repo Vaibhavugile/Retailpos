@@ -1,429 +1,178 @@
-/* ==========================================
-   VARIANT TOGGLE
-========================================== */
+/* ==========================================================
+   PRODUCT VARIANTS
+========================================================== */
 
-.variant-toggle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 22px 24px;
-
-  border: 1px solid #edf2f7;
-  border-radius: 20px;
-
-  background: linear-gradient(
-    180deg,
-    #ffffff,
-    #fafbff
-  );
-
-  margin-bottom: 28px;
+.variant-section {
+    margin-bottom: 35px;
 }
 
-.variant-toggle h4 {
-  margin: 0;
-  font-size: 18px;
-  color: #111827;
-  font-weight: 700;
+.variant-section h3 {
+    margin-bottom: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #222;
 }
 
-.variant-toggle p {
-  margin-top: 6px;
-  color: #6b7280;
-  font-size: 14px;
+/* ==========================================================
+   CHIP CONTAINER
+========================================================== */
+
+.chip-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 18px;
 }
 
-/* ==========================================
-   SWITCH
-========================================== */
+/* ==========================================================
+   CHIP
+========================================================== */
 
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 62px;
-  height: 34px;
+.variant-chip {
+    border: 1px solid #d9d9d9;
+    background: #fff;
+    color: #444;
+    border-radius: 999px;
+    padding: 10px 18px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: .25s;
 }
 
-.switch input {
-  display: none;
+.variant-chip:hover {
+    border-color: #2563eb;
+    color: #2563eb;
 }
 
-.slider {
-  position: absolute;
-  inset: 0;
-
-  background: #d1d5db;
-
-  border-radius: 50px;
-
-  transition: 0.3s;
-
-  cursor: pointer;
+.variant-chip.active {
+    background: #2563eb;
+    color: white;
+    border-color: #2563eb;
 }
 
-.slider::before {
-  content: "";
+/* ==========================================================
+   ADD CUSTOM
+========================================================== */
 
-  position: absolute;
-
-  width: 26px;
-  height: 26px;
-
-  left: 4px;
-  top: 4px;
-
-  background: white;
-
-  border-radius: 50%;
-
-  transition: 0.3s;
-
-  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+.custom-input-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
 }
 
-.switch input:checked + .slider {
-  background: #5b5fef;
+.custom-input-row input {
+    flex: 1;
+    height: 46px;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    padding: 0 15px;
+    font-size: 14px;
+    outline: none;
+    transition: .25s;
 }
 
-.switch input:checked + .slider::before {
-  transform: translateX(28px);
+.custom-input-row input:focus {
+    border-color: #2563eb;
 }
 
-/* ==========================================
-   ADD ATTRIBUTE BUTTON
-========================================== */
-
-.add-attribute-btn {
-
-  border: none;
-
-  background: linear-gradient(
-    135deg,
-    #5b5fef,
-    #7c3aed
-  );
-
-  color: white;
-
-  padding: 14px 22px;
-
-  border-radius: 14px;
-
-  cursor: pointer;
-
-  font-weight: 700;
-
-  font-size: 15px;
-
-  margin-bottom: 24px;
-
-  transition: .25s;
+.custom-input-row button {
+    height: 46px;
+    padding: 0 24px;
+    border: none;
+    border-radius: 10px;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: .25s;
 }
 
-.add-attribute-btn:hover {
-
-  transform: translateY(-2px);
-
-  box-shadow:
-      0 12px 30px rgba(91,95,239,.30);
-
+.custom-input-row button:hover {
+    background: #1d4ed8;
 }
 
-/* ==========================================
-   ATTRIBUTE LIST
-========================================== */
+/* ==========================================================
+   SUMMARY
+========================================================== */
 
-.attribute-list{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:24px;
-
+.variant-summary {
+    margin: 35px 0;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 18px;
 }
 
-/* ==========================================
-   ATTRIBUTE CARD
-========================================== */
-
-.attribute-card{
-
-    background:#fff;
-
-    border:1px solid #edf2f7;
-
-    border-radius:20px;
-
-    padding:24px;
-
-    box-shadow:
-        0 10px 30px rgba(15,23,42,.05);
-
+.variant-summary div {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* ==========================================
-   HEADER
-========================================== */
-
-.attribute-header{
-
-    display:flex;
-
-    gap:15px;
-
-    align-items:center;
-
-    margin-bottom:20px;
-
+.variant-summary strong {
+    font-size: 14px;
+    color: #444;
 }
 
-.attribute-header input{
-
-    flex:1;
-
+.variant-summary span {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #2563eb;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
 }
 
-/* ==========================================
-   INPUTS
-========================================== */
-
-.attribute-card input{
-
-    width:100%;
-
-    height:52px;
-
-    border:1px solid #dbe3ef;
-
-    border-radius:14px;
-
-    padding:0 16px;
-
-    font-size:15px;
-
-    outline:none;
-
-    transition:.3s;
-
-}
-
-.attribute-card input:focus{
-
-    border-color:#5b5fef;
-
-    box-shadow:
-        0 0 0 4px rgba(91,95,239,.08);
-
-}
-
-/* ==========================================
-   DELETE ATTRIBUTE
-========================================== */
-
-.delete-attribute-btn{
-
-    width:120px;
-
-    height:52px;
-
-    border:none;
-
-    background:#fef2f2;
-
-    color:#ef4444;
-
-    border-radius:14px;
-
-    cursor:pointer;
-
-    font-weight:700;
-
-    transition:.25s;
-
-}
-
-.delete-attribute-btn:hover{
-
-    background:#fee2e2;
-
-}
-
-/* ==========================================
-   VALUE LIST
-========================================== */
-
-.value-list{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:14px;
-
-}
-
-/* ==========================================
-   VALUE ITEM
-========================================== */
-
-.value-item{
-
-    display:flex;
-
-    gap:12px;
-
-    align-items:center;
-
-}
-
-.value-item input{
-
-    flex:1;
-
-}
-
-/* ==========================================
-   REMOVE VALUE
-========================================== */
-
-.remove-value-btn{
-
-    width:52px;
-
-    height:52px;
-
-    border:none;
-
-    border-radius:14px;
-
-    background:#fff1f2;
-
-    color:#ef4444;
-
-    font-size:22px;
-
-    cursor:pointer;
-
-    transition:.25s;
-
-}
-
-.remove-value-btn:hover{
-
-    background:#ffe4e6;
-
-}
-
-/* ==========================================
-   ADD VALUE
-========================================== */
-
-.add-value-btn{
-
-    margin-top:18px;
-
-    border:none;
-
-    background:#eef2ff;
-
-    color:#5b5fef;
-
-    padding:13px 18px;
-
-    border-radius:14px;
-
-    cursor:pointer;
-
-    font-weight:700;
-
-    transition:.25s;
-
-}
-
-.add-value-btn:hover{
-
-    background:#dde5ff;
-
-}
-
-/* ==========================================
+/* ==========================================================
    GENERATE BUTTON
-========================================== */
+========================================================== */
 
-.generate-btn{
-
-    margin-top:32px;
-
-    width:100%;
-
-    height:60px;
-
-    border:none;
-
-    border-radius:18px;
-
-    background:linear-gradient(
+.generate-btn {
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(
         135deg,
-        #16a34a,
-        #22c55e
+        #2563eb,
+        #3b82f6
     );
-
-    color:white;
-
-    font-size:18px;
-
-    font-weight:800;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-    box-shadow:
-        0 15px 35px rgba(34,197,94,.25);
-
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .25s;
 }
 
-.generate-btn:hover{
-
-    transform:translateY(-3px);
-
-    box-shadow:
-        0 20px 45px rgba(34,197,94,.35);
-
+.generate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(37,99,235,.25);
 }
 
-/* ==========================================
-   RESPONSIVE
-========================================== */
+/* ==========================================================
+   MOBILE
+========================================================== */
 
-@media(max-width:768px){
+@media (max-width:768px){
 
-.attribute-header{
+.variant-summary{
+grid-template-columns:1fr;
+}
 
+.custom-input-row{
 flex-direction:column;
-
+align-items:stretch;
 }
 
-.delete-attribute-btn{
-
+.custom-input-row button{
 width:100%;
-
-}
-
-.value-item{
-
-flex-direction:column;
-
-}
-
-.remove-value-btn{
-
-width:100%;
-
-height:48px;
-
 }
 
 }

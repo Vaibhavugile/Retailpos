@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./VariantGenerator.css";
 
 export default function VariantGenerator({
@@ -6,206 +7,282 @@ export default function VariantGenerator({
 }) {
 
   /* ===========================================
-      ENABLE VARIANTS
+      DEFAULT CHIPS
   =========================================== */
 
-  const toggleVariants = () => {
+  const defaultColors = [
+    "Black",
+    "White",
+    "Blue",
+    "Red",
+    "Green",
+    "Yellow",
+    "Grey",
+    "Brown",
+  ];
+
+  const defaultSizes = [
+    "XS",
+    "S",
+    "M",
+    "L",
+    "XL",
+    "XXL",
+  ];
+
+  /* ===========================================
+      CHIP STATE
+  =========================================== */
+
+  const [availableColors, setAvailableColors] =
+    useState(defaultColors);
+
+  const [availableSizes, setAvailableSizes] =
+    useState(defaultSizes);
+
+  const [newColor, setNewColor] =
+    useState("");
+
+  const [newSize, setNewSize] =
+    useState("");
+
+  /* ===========================================
+      SELECT COLOR
+  =========================================== */
+
+  const toggleColor = (color) => {
+
+    const colors =
+      product.selectedColors || [];
+
+    const exists =
+      colors.includes(color);
+
     setProduct((prev) => ({
       ...prev,
 
-      hasVariants: !prev.hasVariants,
-
-      attributes:
-        prev.attributes || [],
-
-      variants:
-        prev.variants || [],
+      selectedColors: exists
+        ? colors.filter(
+            (c) => c !== color
+          )
+        : [...colors, color],
     }));
   };
 
   /* ===========================================
-      ADD ATTRIBUTE
+      SELECT SIZE
   =========================================== */
 
- const addAttribute = () => {
-  setProduct((prev) => ({
-    ...prev,
-    attributes: [
-      ...prev.attributes,
-      {
-        id: prev.attributes.length + 1,
-        name: "",
-        values: [],
-      },
-    ],
-  }));
-};
+  const toggleSize = (size) => {
+
+    const sizes =
+      product.selectedSizes || [];
+
+    const exists =
+      sizes.includes(size);
+
+    setProduct((prev) => ({
+      ...prev,
+
+      selectedSizes: exists
+        ? sizes.filter(
+            (s) => s !== size
+          )
+        : [...sizes, size],
+    }));
+  };
+
   /* ===========================================
-    UPDATE ATTRIBUTE NAME
-=========================================== */
+      ADD CUSTOM COLOR
+  =========================================== */
 
-const updateAttributeName = (id, value) => {
-  setProduct((prev) => ({
-    ...prev,
-    attributes: prev.attributes.map((item) =>
-      item.id === id
-        ? {
-            ...item,
-            name: value,
-          }
-        : item
-    ),
-  }));
-};
+  const addCustomColor = () => {
 
-/* ===========================================
-    ADD VALUE
-=========================================== */
+    if (!newColor.trim()) return;
 
-const addValue = (id) => {
-  setProduct((prev) => ({
-    ...prev,
-    attributes: prev.attributes.map((item) =>
-      item.id === id
-        ? {
-            ...item,
-            values: [...item.values, ""],
-          }
-        : item
-    ),
-  }));
-};
-
-/* ===========================================
-    UPDATE VALUE
-=========================================== */
-
-const updateValue = (
-  attributeId,
-  index,
-  value
-) => {
-  setProduct((prev) => ({
-    ...prev,
-    attributes: prev.attributes.map((item) => {
-      if (item.id !== attributeId) return item;
-
-      const values = [...item.values];
-
-      values[index] = value;
-
-      return {
-        ...item,
-        values,
-      };
-    }),
-  }));
-};
-
-/* ===========================================
-    REMOVE VALUE
-=========================================== */
-
-const removeValue = (
-  attributeId,
-  index
-) => {
-  setProduct((prev) => ({
-    ...prev,
-    attributes: prev.attributes.map((item) => {
-      if (item.id !== attributeId) return item;
-
-      return {
-        ...item,
-        values: item.values.filter(
-          (_, i) => i !== index
-        ),
-      };
-    }),
-  }));
-};
-
-/* ===========================================
-    DELETE ATTRIBUTE
-=========================================== */
-
-const deleteAttribute = (id) => {
-  setProduct((prev) => ({
-    ...prev,
-    attributes: prev.attributes.filter(
-      (item) => item.id !== id
-    ),
-  }));
-};
-/* ===========================================
-    GENERATE VARIANTS
-=========================================== */
-
-const generateVariants = () => {
-  // Remove empty attributes
-  const attributes = product.attributes.filter(
-    (attribute) =>
-      attribute.name.trim() &&
-      attribute.values.filter((v) => v.trim()).length
-  );
-
-  if (!attributes.length) {
-    return;
-  }
-
-  // Recursive combination generator
-  const combinations = [];
-
-  const build = (
-    index,
-    current,
-    labels
-  ) => {
-    if (index === attributes.length) {
-      combinations.push({
-        attributes: current,
-        label: labels.join(" / "),
-      });
+    if (
+      availableColors.includes(
+        newColor.trim()
+      )
+    ) {
+      setNewColor("");
       return;
     }
 
-    const attribute = attributes[index];
+    setAvailableColors((prev) => [
+      ...prev,
+      newColor.trim(),
+    ]);
 
-    attribute.values
-      .filter((v) => v.trim())
-      .forEach((value) => {
-        build(
-          index + 1,
-          {
-            ...current,
-            [attribute.name]: value,
-          },
-          [...labels, value]
-        );
-      });
+    setProduct((prev) => ({
+      ...prev,
+
+      selectedColors: [
+        ...(prev.selectedColors || []),
+        newColor.trim(),
+      ],
+    }));
+
+    setNewColor("");
   };
 
-  build(0, {}, []);
+  /* ===========================================
+      ADD CUSTOM SIZE
+  =========================================== */
 
-  const variants = combinations.map(
-    (item, index) => ({
-      id: `${product.productCode}-${String(
-        index + 1
-      ).padStart(2, "0")}`,
+  const addCustomSize = () => {
+
+    if (!newSize.trim()) return;
+
+    if (
+      availableSizes.includes(
+        newSize.trim()
+      )
+    ) {
+      setNewSize("");
+      return;
+    }
+
+    setAvailableSizes((prev) => [
+      ...prev,
+      newSize.trim(),
+    ]);
+
+    setProduct((prev) => ({
+      ...prev,
+
+      selectedSizes: [
+        ...(prev.selectedSizes || []),
+        newSize.trim(),
+      ],
+    }));
+
+    setNewSize("");
+  };
+  /* ===========================================
+    GENERATE VARIANTS
+=========================================== */
+/* ===========================================
+    GET NEXT VARIANT NUMBER
+=========================================== */
+
+const getNextVariantNumber = (variants) => {
+
+  if (!variants.length) return 1;
+
+  const numbers = variants
+    .map((variant) => {
+
+      const parts = variant.id.split("-");
+
+      return Number(parts[parts.length - 1]);
+
+    })
+    .filter((n) => !isNaN(n));
+
+  return Math.max(...numbers) + 1;
+
+};
+const generateVariants = () => {
+
+  const colors = product.selectedColors || [];
+  const sizes = product.selectedSizes || [];
+
+  const existingVariants = product.variants || [];
+
+  let combinations = [];
+
+  // No Color & No Size
+  if (!colors.length && !sizes.length) {
+
+    combinations.push({
+      label: "Default",
+      attributes: {},
+    });
+
+  }
+
+  // Only Color
+  else if (colors.length && !sizes.length) {
+
+    combinations = colors.map((color) => ({
+      label: color,
+      attributes: {
+        Color: color,
+      },
+    }));
+
+  }
+
+  // Only Size
+  else if (!colors.length && sizes.length) {
+
+    combinations = sizes.map((size) => ({
+      label: size,
+      attributes: {
+        Size: size,
+      },
+    }));
+
+  }
+
+  // Color + Size
+  else {
+
+    colors.forEach((color) => {
+
+      sizes.forEach((size) => {
+
+        combinations.push({
+          label: `${color} / ${size}`,
+          attributes: {
+            Color: color,
+            Size: size,
+          },
+        });
+
+      });
+
+    });
+
+  }
+
+ let nextNumber =
+  getNextVariantNumber(existingVariants);
+
+  const variants = combinations.map((combo) => {
+
+    // Find existing variant
+    const existing = existingVariants.find(
+      (variant) => variant.variantName === combo.label
+    );
+
+    // Preserve existing
+    if (existing) {
+
+      return existing;
+
+    }
+
+    // Generate next barcode
+    const code =
+      `${product.productCode}-${String(nextNumber).padStart(2, "0")}`;
+
+    nextNumber++;
+
+    return {
+
+      id: code,
 
       productCode: product.productCode,
 
-      barcode: `${product.productCode}-${String(
-        index + 1
-      ).padStart(2, "0")}`,
+      barcode: code,
 
-      sku: `${product.productCode}-${String(
-        index + 1
-      ).padStart(2, "0")}`,
+      sku: code,
 
-      variantName: item.label,
+      variantName: combo.label,
 
-      attributes: item.attributes,
+      attributes: combo.attributes,
 
       purchasePrice: 0,
 
@@ -216,189 +293,240 @@ const generateVariants = () => {
       lowStock: 0,
 
       status: true,
-    })
+
+    };
+
+  });
+
+ // Merge existing + new variants
+const mergedVariants = [...existingVariants];
+
+variants.forEach((newVariant) => {
+  const exists = mergedVariants.some(
+    (variant) =>
+      variant.variantName === newVariant.variantName
   );
 
-  setProduct((prev) => ({
-    ...prev,
-    variants,
-  }));
+  if (!exists) {
+    mergedVariants.push(newVariant);
+  }
+});
+
+setProduct((prev) => ({
+  ...prev,
+  variants: mergedVariants,
+
+  // Clear selections after adding
+  selectedColors: [],
+  selectedSizes: [],
+}));
+
 };
+/* ===========================================
+    PREVIEW VARIANTS
+=========================================== */
 
+const previewVariants = [];
+
+const colors = product.selectedColors || [];
+const sizes = product.selectedSizes || [];
+
+if (!colors.length && !sizes.length) {
+  previewVariants.push("Default");
+}
+else if (colors.length && !sizes.length) {
+  colors.forEach((color) => {
+    previewVariants.push(color);
+  });
+}
+else if (!colors.length && sizes.length) {
+  sizes.forEach((size) => {
+    previewVariants.push(size);
+  });
+}
+else {
+  colors.forEach((color) => {
+    sizes.forEach((size) => {
+      previewVariants.push(`${color} / ${size}`);
+    });
+  });
+}
   return (
+  <div className="product-card">
 
-    <div className="product-card">
+    <div className="product-card-header">
+      <h2>Product Variants</h2>
 
-      <div className="product-card-header">
+      <p>
+        Select available colors and sizes for this product.
+      </p>
+    </div>
 
-        <h2>
-          Product Variants
-        </h2>
+    <div className="product-card-body">
 
-        <p>
-          Create Color, Size or any custom
-          attributes for this product.
-        </p>
+      {/* =======================
+            COLORS
+      ======================== */}
 
-      </div>
+      <div className="variant-section">
 
-      <div className="product-card-body">
+        <h3>🎨 Colors</h3>
 
-        {/* Enable */}
+        <div className="chip-container">
 
-        <div className="variant-toggle">
+          {availableColors.map((color) => (
 
-          <div>
+            <button
+              key={color}
+              type="button"
+              className={`variant-chip ${
+                (product.selectedColors || []).includes(color)
+                  ? "active"
+                  : ""
+              }`}
+              onClick={() => toggleColor(color)}
+            >
+              {color}
+            </button>
 
-            <h4>
-              Enable Variants
-            </h4>
-
-            <p>
-              Turn this on if your product
-              has multiple variations.
-            </p>
-
-          </div>
-
-          <label className="switch">
-
-            <input
-              type="checkbox"
-              checked={product.hasVariants}
-              onChange={toggleVariants}
-            />
-
-            <span className="slider"></span>
-
-          </label>
+          ))}
 
         </div>
 
-        {/* Attributes */}
+        <div className="custom-input-row">
 
-        {product.hasVariants && (
+          <input
+            type="text"
+            placeholder="Add Custom Color"
+            value={newColor}
+            onChange={(e) => setNewColor(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                addCustomColor();
+              }
+            }}
+          />
 
-          <>
+          <button
+            type="button"
+            onClick={addCustomColor}
+          >
+            Add
+          </button>
+
+        </div>
+
+      </div>
+
+      {/* =======================
+            SIZES
+      ======================== */}
+
+      <div className="variant-section">
+
+        <h3>📏 Sizes</h3>
+
+        <div className="chip-container">
+
+          {availableSizes.map((size) => (
 
             <button
+              key={size}
               type="button"
-              className="add-attribute-btn"
-              onClick={addAttribute}
+              className={`variant-chip ${
+                (product.selectedSizes || []).includes(size)
+                  ? "active"
+                  : ""
+              }`}
+              onClick={() => toggleSize(size)}
             >
-              + Add Attribute
+              {size}
             </button>
 
-            <div className="attribute-list">
+          ))}
 
-  {product.attributes.map((attribute) => (
+        </div>
 
-    <div
-      key={attribute.id}
-      className="attribute-card"
-    >
+        <div className="custom-input-row">
 
-      <div className="attribute-header">
+          <input
+            type="text"
+            placeholder="Add Custom Size"
+            value={newSize}
+            onChange={(e) => setNewSize(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                addCustomSize();
+              }
+            }}
+          />
 
-        <input
-          type="text"
-          placeholder="Attribute Name"
-          value={attribute.name}
-          onChange={(e) =>
-            updateAttributeName(
-              attribute.id,
-              e.target.value
-            )
-          }
-        />
+          <button
+            type="button"
+            onClick={addCustomSize}
+          >
+            Add
+          </button>
 
-        <button
-          type="button"
-          className="delete-attribute-btn"
-          onClick={() =>
-            deleteAttribute(attribute.id)
-          }
+        </div>
+
+      </div>
+
+      {/* =======================
+          SUMMARY
+      ======================== */}
+
+      {/* =======================
+      PREVIEW
+======================= */}
+
+<div className="variant-preview">
+
+  <h3>
+    Ready to Add ({previewVariants.length})
+  </h3>
+
+  {previewVariants.length === 0 ? (
+
+    <p className="preview-empty">
+      Select colors and/or sizes to preview variants.
+    </p>
+
+  ) : (
+
+    <div className="preview-list">
+
+      {previewVariants.map((variant) => (
+
+        <div
+          key={variant}
+          className="preview-item"
         >
-          Delete
-        </button>
 
-      </div>
+          <span>{variant}</span>
 
-      <div className="value-list">
+        </div>
 
-        {attribute.values.map(
-          (value, index) => (
+      ))}
 
-            <div
-              key={index}
-              className="value-item"
-            >
+    </div>
 
-              <input
-                type="text"
-                placeholder="Value"
-                value={value}
-                onChange={(e) =>
-                  updateValue(
-                    attribute.id,
-                    index,
-                    e.target.value
-                  )
-                }
-              />
+  )}
 
-              <button
-                type="button"
-                className="remove-value-btn"
-                onClick={() =>
-                  removeValue(
-                    attribute.id,
-                    index
-                  )
-                }
-              >
-                ×
-              </button>
-
-            </div>
-
-          )
-        )}
-
-      </div>
+</div>
 
       <button
         type="button"
-        className="add-value-btn"
-        onClick={() =>
-          addValue(attribute.id)
-        }
+        className="generate-btn"
+        onClick={generateVariants}
       >
-        + Add Value
+        Generate Variants
       </button>
 
     </div>
 
-  ))}
-
-</div>
-<button
-  type="button"
-  className="generate-btn"
-  onClick={generateVariants}
->
-  Generate Variants
-</button>
-
-
-          </>
-
-        )}
-
-      </div>
-
-    </div>
-
-  );
-
+  </div>
+);
 }
