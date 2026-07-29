@@ -1,0 +1,281 @@
+/* =========================================================
+   Finance Dashboard
+========================================================= */
+
+.finance-dashboard {
+  padding: 24px;
+  background: #f5f7fb;
+  min-height: 100vh;
+}
+
+/* =========================================================
+   Loading
+========================================================= */
+
+.finance-loading,
+.finance-error {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.finance-loader {
+  width: 60px;
+  height: 60px;
+  border: 5px solid #ececec;
+  border-top: 5px solid #2563eb;
+  border-radius: 50%;
+  animation: finance-spin 0.8s linear infinite;
+}
+
+@keyframes finance-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.retry-btn {
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+}
+
+/* =========================================================
+   Charts Grid
+========================================================= */
+
+.finance-chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 24px;
+  margin: 30px 0;
+}
+
+/* =========================================================
+   Sections
+========================================================= */
+
+.finance-section {
+  margin-top: 35px;
+  background: white;
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 10px 35px rgba(0,0,0,.05);
+}
+
+.finance-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.finance-section-header h2 {
+  margin: 0;
+  font-size: 22px;
+  color: #111827;
+}
+
+.finance-section-header span {
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* =========================================================
+   Cards
+========================================================= */
+
+.finance-card {
+  background: white;
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 8px 25px rgba(0,0,0,.05);
+}
+
+.finance-card-title {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+.finance-card-value {
+  font-size: 30px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.finance-card-subtitle {
+  margin-top: 10px;
+  color: #10b981;
+  font-size: 13px;
+}
+
+/* =========================================================
+   Tables
+========================================================= */
+
+.finance-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.finance-table thead {
+  background: #f8fafc;
+}
+
+.finance-table th {
+  padding: 16px;
+  text-align: left;
+  font-size: 14px;
+  color: #475569;
+}
+
+.finance-table td {
+  padding: 16px;
+  border-top: 1px solid #edf2f7;
+}
+
+.finance-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+/* =========================================================
+   Chart Containers
+========================================================= */
+
+.chart-card {
+  background: white;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.05);
+}
+
+.chart-title {
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* =========================================================
+   Insights
+========================================================= */
+
+.insights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 18px;
+}
+
+.insight-card {
+  background: white;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.05);
+}
+
+.insight-title {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.insight-value {
+  margin-top: 10px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   Export Buttons
+========================================================= */
+
+.export-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.export-buttons button {
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  cursor: pointer;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  transition: .25s;
+}
+
+.export-buttons button:hover {
+  transform: translateY(-2px);
+}
+
+.export-buttons button:nth-child(2) {
+  background: #16a34a;
+}
+
+.export-buttons button:nth-child(3) {
+  background: #dc2626;
+}
+
+.export-buttons button:nth-child(4) {
+  background: #f59e0b;
+}
+
+/* =========================================================
+   Responsive
+========================================================= */
+
+@media (max-width: 992px) {
+
+  .finance-chart-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .finance-dashboard {
+    padding: 15px;
+  }
+
+  .finance-section {
+    padding: 16px;
+  }
+
+  .finance-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .finance-table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .finance-card-value {
+    font-size: 24px;
+  }
+
+}
+
+@media (max-width: 500px) {
+
+  .export-buttons {
+    flex-direction: column;
+  }
+
+  .export-buttons button {
+    width: 100%;
+  }
+
+}

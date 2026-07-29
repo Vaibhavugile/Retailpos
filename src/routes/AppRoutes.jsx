@@ -17,6 +17,7 @@ import AddProduct from "../pages/Products/AddProduct";
 import InventoryDashboard from "../pages/Inventory/InventoryDashboard";
 import BillingDashboard from "../pages/Billing/BillingDashboard";
 import OrdersDashboard from "../pages/Orders/OrdersDashboard";
+import FinanceDashboard from "../pages/Finance/FinanceDashboard";
 export default function AppRoutes() {
   return (
     <BrowserRouter>
@@ -55,6 +56,10 @@ export default function AppRoutes() {
           <Route
           path="/orders"
           element={<OrdersDashboard />}
+          />
+          <Route
+          path="/reports"
+          element={<FinanceDashboard />}
           />
                  <Route
   path="/subcategories"

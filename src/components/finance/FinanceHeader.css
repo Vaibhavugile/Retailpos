@@ -1,0 +1,207 @@
+.finance-header {
+
+  background: white;
+
+  border-radius: 18px;
+
+  padding: 24px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 25px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,.05);
+
+}
+
+.finance-header-left{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:18px;
+
+}
+
+.finance-icon{
+
+  width:65px;
+
+  height:65px;
+
+  border-radius:16px;
+
+  background:#2563eb;
+
+  color:white;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  font-size:30px;
+
+}
+
+.finance-header h1{
+
+  margin:0;
+
+  font-size:30px;
+
+  color:#111827;
+
+}
+
+.finance-header p{
+
+  margin-top:6px;
+
+  color:#6b7280;
+
+}
+
+.finance-header-right{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:18px;
+
+}
+
+.finance-status{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  background:#dcfce7;
+
+  color:#15803d;
+
+  padding:10px 16px;
+
+  border-radius:50px;
+
+  font-weight:600;
+
+}
+
+.finance-updated{
+
+  display:flex;
+
+  flex-direction:column;
+
+  font-size:13px;
+
+  color:#64748b;
+
+}
+
+.finance-refresh-btn{
+
+  border:none;
+
+  background:#2563eb;
+
+  color:white;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  padding:12px 18px;
+
+  border-radius:10px;
+
+  cursor:pointer;
+
+  font-weight:600;
+
+  transition:.3s;
+
+}
+
+.finance-refresh-btn:hover{
+
+  transform:translateY(-2px);
+
+}
+
+.spin{
+
+  animation:spin .8s linear infinite;
+
+}
+
+@keyframes spin{
+
+  to{
+
+    transform:rotate(360deg);
+
+  }
+
+}
+
+@media(max-width:992px){
+
+  .finance-header{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:20px;
+
+  }
+
+  .finance-header-right{
+
+    width:100%;
+
+    flex-wrap:wrap;
+
+  }
+
+}
+
+@media(max-width:768px){
+
+  .finance-header-left{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+  }
+
+  .finance-header h1{
+
+    font-size:24px;
+
+  }
+
+  .finance-refresh-btn{
+
+    width:100%;
+
+    justify-content:center;
+
+  }
+
+}

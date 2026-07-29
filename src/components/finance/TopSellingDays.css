@@ -1,0 +1,187 @@
+.top-selling-days{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:24px;
+
+    margin:30px 0;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.05);
+
+}
+
+.top-selling-header{
+
+    margin-bottom:25px;
+
+}
+
+.top-selling-header h2{
+
+    margin:0;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:24px;
+
+    color:#111827;
+
+}
+
+.top-selling-header p{
+
+    margin-top:8px;
+
+    color:#64748b;
+
+}
+
+.top-selling-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+.top-day-card{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    padding:18px;
+
+    border:1px solid #edf2f7;
+
+    border-radius:16px;
+
+    transition:.3s;
+
+}
+
+.top-day-card:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 25px rgba(0,0,0,.05);
+
+}
+
+.top-day-rank{
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:50%;
+
+    background:#2563eb;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:20px;
+
+    font-weight:700;
+
+}
+
+.top-day-content{
+
+    flex:1;
+
+}
+
+.top-day-content h3{
+
+    margin:0 0 14px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:#111827;
+
+}
+
+.top-day-stats{
+
+    display:flex;
+
+    gap:40px;
+
+    flex-wrap:wrap;
+
+}
+
+.top-day-stats div{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.top-day-stats span{
+
+    color:#64748b;
+
+    font-size:13px;
+
+}
+
+.top-day-stats strong{
+
+    margin-top:5px;
+
+    font-size:18px;
+
+    color:#111827;
+
+}
+
+.top-day-icon{
+
+    color:#16a34a;
+
+    font-size:30px;
+
+}
+
+@media(max-width:768px){
+
+    .top-day-card{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .top-day-stats{
+
+        gap:18px;
+
+        width:100%;
+
+    }
+
+}

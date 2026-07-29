@@ -13,6 +13,7 @@ import VariantGenerator from "../../components/product/VariantGenerator/VariantG
 import VariantTable from "../../components/product/VariantTable/VariantTable";
 import ProductValidation from "../../components/product/ProductValidation/ProductValidation";
 import ProductHeader from "../../components/product/ProductHeader/ProductHeader";
+import BarcodePrint from "../../components/barcode/BarcodePrint";
 import {
   addProduct,
   getPreviewProductCode,
@@ -172,6 +173,9 @@ const handleSaveProduct = async () => {
         <ProductValidation
           product={product}
         />
+        <BarcodePrint
+  product={product}
+/>
 
         {/* ===========================================
             FOOTER

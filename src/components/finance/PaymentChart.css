@@ -1,0 +1,21 @@
+/* Same as RevenueChart.css */
+.chart-card{
+    background:#fff;
+    border-radius:18px;
+    padding:24px;
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+}
+
+.chart-header{
+    margin-bottom:20px;
+}
+
+.chart-header h3{
+    margin:0;
+    font-size:20px;
+}
+
+.chart-header p{
+    margin-top:6px;
+    color:#64748b;
+}

@@ -1,0 +1,55 @@
+/* Uses the same styles as RevenueChart */
+
+.chart-card{
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:24px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+
+}
+
+.chart-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+.chart-header h3{
+
+    margin:0;
+
+    font-size:20px;
+
+    color:#111827;
+
+}
+
+.chart-header p{
+
+    margin-top:6px;
+
+    color:#64748b;
+
+    font-size:14px;
+
+}
+
+@media(max-width:768px){
+
+    .chart-card{
+
+        padding:18px;
+
+    }
+
+}
