@@ -6,10 +6,11 @@ export function print58mm({
   copies,
   storeName,
 }) {
+
   const printWindow = window.open(
     "",
     "_blank",
-    "width=350,height=800"
+    "width=320,height=700,resizable=yes"
   );
 
   if (!printWindow) {
@@ -21,54 +22,56 @@ export function print58mm({
     product,
     storeName,
     copies,
-    paperWidth: "58mm",
+    paperWidth: "50x30",
   });
 
   printWindow.document.open();
 
-  printWindow.document.write(`
+printWindow.document.write(`
 <!DOCTYPE html>
 <html>
 <head>
 
 <meta charset="UTF-8">
 
-<title>58mm Barcode</title>
+<title>50 × 30 Barcode Label</title>
 
 <style>
 
+/* ==========================================
+                PAGE
+========================================== */
+
 @page{
-
-    size:58mm auto;
-
+    size:50mm 30mm;
     margin:0;
-
 }
+
+/* ==========================================
+                RESET
+========================================== */
 
 *{
-
     margin:0;
-
     padding:0;
-
     box-sizing:border-box;
-
     font-family:Arial,sans-serif;
-
 }
+
+/* ==========================================
+            HTML / BODY
+========================================== */
 
 html,
 body{
 
-    width:58mm;
+    width:50mm;
 
     margin:0;
 
     padding:0;
 
     background:#ffffff;
-
-    overflow-x:hidden;
 
 }
 
@@ -86,13 +89,13 @@ body{
 
     justify-content:flex-end;
 
-    gap:10px;
+    gap:8px;
 
-    padding:10px;
+    padding:8px;
 
-    background:#ffffff;
+    background:#fff;
 
-    border-bottom:1px solid #e5e7eb;
+    border-bottom:1px solid #ddd;
 
     z-index:999;
 
@@ -100,11 +103,11 @@ body{
 
 .toolbar button{
 
-    padding:8px 16px;
+    padding:6px 12px;
 
     border:none;
 
-    border-radius:8px;
+    border-radius:6px;
 
     background:#111827;
 
@@ -112,7 +115,7 @@ body{
 
     cursor:pointer;
 
-    font-size:14px;
+    font-size:12px;
 
     font-weight:600;
 
@@ -130,133 +133,212 @@ body{
 
 .content{
 
-    width:58mm;
+    width:50mm;
 
     margin:0 auto;
 
-    padding:2mm;
+    padding:0;
 
 }
 
 /* ==========================================
-              THERMAL SHEET
+            LABEL SHEET
 ========================================== */
 
+.sheet-50x30,
 .sheet-58{
 
-    width:58mm;
+    width:50mm;
 
     margin:0 auto;
 
 }
 
 /* ==========================================
-                 LABEL
+                LABEL
 ========================================== */
 
 .label{
 
-    width:54mm;
+    width:50mm;
 
-    margin:0 auto 2mm auto;
+    height:30mm;
 
-    padding:2mm 1mm;
+    padding:1mm;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-evenly;
+
+    align-items:center;
 
     text-align:center;
 
-    break-inside:avoid;
-
-    page-break-inside:avoid;
-
-    border-bottom:1px dashed #d1d5db;
+    overflow:hidden;
 
 }
 
-.label:last-child{
+/* Every label except last gets a new page */
 
-    border-bottom:none;
+.label:not(:last-child){
+
+    page-break-after:always;
+
+    break-after:page;
 
 }
 
 /* ==========================================
-                TEXT
+                STORE
 ========================================== */
 
 .store{
 
-    font-size:13px;
+    width:100%;
+
+    font-size:11px;
 
     font-weight:700;
 
+    line-height:1;
+
+    text-align:center;
+
 }
 
-.product{
+/* ==========================================
+            PRICE + VARIANT
+========================================== */
 
-    margin-top:2px;
+.label-top{
 
-    font-size:12px;
+    width:100%;
 
-    font-weight:600;
+    display:flex;
 
-    word-break:break-word;
+    justify-content:space-between;
+
+    align-items:center;
 
 }
 
 .variant{
 
-    margin-top:2px;
+    flex:1;
 
-    font-size:10px;
+    text-align:left;
 
-    word-break:break-word;
+    font-size:9px;
+
+    font-weight:600;
+
+    overflow:hidden;
+
+    white-space:nowrap;
+
+    text-overflow:ellipsis;
 
 }
 
 .price{
 
-    margin:3px 0;
+    margin-left:2mm;
 
-    font-size:16px;
+    font-size:15px;
 
     font-weight:700;
+
+    white-space:nowrap;
 
 }
 
 /* ==========================================
-               BARCODE
+                PRODUCT
+========================================== */
+
+.product{
+
+    width:100%;
+
+    text-align:center;
+
+    font-size:8px;
+
+    font-weight:600;
+
+    overflow:hidden;
+
+    white-space:nowrap;
+
+    text-overflow:ellipsis;
+
+}
+
+/* ==========================================
+                BARCODE
 ========================================== */
 
 .barcode{
 
+    width:48mm;
+
+    height:13mm;
+
     display:block;
 
-    width:100%;
-
-    height:42px;
-
-    margin:5px auto;
+    margin:1mm auto;
 
 }
 
+/* ==========================================
+            BARCODE NUMBER
+========================================== */
+
 .barcode-number{
 
-    margin-top:2px;
+    width:100%;
 
-    font-size:10px;
+    text-align:center;
 
-    letter-spacing:1px;
+    font-size:7px;
 
-    font-weight:600;
+    font-weight:700;
+
+    letter-spacing:.5px;
 
 }
 
 .sku{
 
-    margin-top:2px;
+    display:none;
 
-    font-size:8px;
+}
 
-    color:#555;
+/* ==========================================
+            SCREEN PREVIEW
+========================================== */
+
+@media screen{
+
+    body{
+
+        background:#f3f4f6;
+
+    }
+
+    .label{
+
+        border:1px dashed #ccc;
+
+        margin-bottom:10px;
+
+        background:#fff;
+
+        box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+    }
 
 }
 
@@ -268,7 +350,7 @@ body{
 
     @page{
 
-        size:58mm auto;
+        size:50mm 30mm;
 
         margin:0;
 
@@ -277,7 +359,7 @@ body{
     html,
     body{
 
-        width:58mm;
+        width:50mm;
 
         margin:0;
 
@@ -295,21 +377,46 @@ body{
 
     .content{
 
+        width:50mm;
+
+        margin:0;
+
+        padding:0;
+
+    }
+
+    .sheet-50x30,
+    .sheet-58{
+
+        width:50mm;
+
+        margin:0;
+
         padding:0;
 
     }
 
     .label{
 
+        width:50mm;
+
+        height:30mm;
+
         margin:0;
 
-        border-bottom:none;
+        padding:1mm;
 
-        page-break-after:auto;
+        border:none;
 
         page-break-inside:avoid;
 
-        break-inside:avoid;
+    }
+
+    .label:not(:last-child){
+
+        page-break-after:always;
+
+        break-after:page;
 
     }
 
@@ -343,75 +450,86 @@ ${body}
 
 </html>
 `);
-
   printWindow.document.close();
 
-  const generate = () => {
+const generate = () => {
 
     const svgs =
-      printWindow.document.querySelectorAll(
-        "svg.barcode"
-      );
+        printWindow.document.querySelectorAll(
+            "svg.barcode"
+        );
 
     svgs.forEach((svg) => {
 
-      const barcode =
-        svg.getAttribute("data-barcode");
+        const barcode =
+            svg.getAttribute("data-barcode");
 
-      if (!barcode) return;
+        if (!barcode) return;
 
-      try {
+        try{
 
-        JsBarcode(svg, barcode, {
+            JsBarcode(svg, barcode, {
 
-          format: "CODE128",
+                format:"CODE128",
 
-          width: 1.4,
+                width:2,
 
-          height: 40,
+                height:50,
 
-          margin: 0,
+                margin:0,
 
-          displayValue: false,
+                displayValue:false,
 
-          background: "#ffffff",
+                background:"#ffffff",
 
-          lineColor: "#000000",
+                lineColor:"#000000",
 
-        });
+                fontOptions:"bold",
 
-      } catch (err) {
+                valid:function(valid){
 
-        console.error(
-          "Barcode Error:",
-          err
-        );
+                    if(!valid){
 
-      }
+                        console.error(
+                            "Invalid Barcode:",
+                            barcode
+                        );
+
+                    }
+
+                }
+
+            });
+
+        }catch(err){
+
+            console.error(
+                "Barcode Error:",
+                err
+            );
+
+        }
 
     });
 
-    setTimeout(() => {
+    requestAnimationFrame(() => {
 
-      printWindow.focus();
+        printWindow.focus();
 
-     
+    });
 
-    },300);
+};
 
-  };
-
-  if (
+if (
     printWindow.document.readyState ===
     "complete"
-  ) {
+) {
 
     generate();
 
-  } else {
+} else {
 
     printWindow.onload = generate;
 
-  }
-
+}
 }

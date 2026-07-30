@@ -4,17 +4,23 @@ export function generateThermalTemplate({
   copies,
   paperWidth = "80mm",
 }) {
-  const sheetClass =
-    paperWidth === "58mm"
-      ? "sheet-58"
-      : "sheet-80";
+
+  const isLabel =
+    paperWidth === "58mm" ||
+    paperWidth === "50x30";
+
+  const sheetClass = isLabel
+    ? "sheet-50x30"
+    : "sheet-80";
 
   let html = `
     <div class="${sheetClass}">
   `;
 
   product.variants.forEach((variant) => {
+
     for (let i = 0; i < copies; i++) {
+
       html += `
         <div class="label">
 
@@ -22,17 +28,39 @@ export function generateThermalTemplate({
             ${storeName}
           </div>
 
-          <div class="product">
-            ${product.name}
-          </div>
+          ${
+            isLabel
+              ? `
 
-          <div class="variant">
-            ${variant.variantName}
-          </div>
+                <div class="label-top">
 
-          <div class="price">
-            ₹${variant.sellingPrice}
-          </div>
+                  <div class="variant">
+                    ${variant.variantName}
+                  </div>
+
+                  <div class="price">
+                    ₹${variant.sellingPrice}
+                  </div>
+
+                </div>
+
+              `
+              : `
+
+                <div class="product">
+                  ${product.name}
+                </div>
+
+                <div class="variant">
+                  ${variant.variantName}
+                </div>
+
+                <div class="price">
+                  ₹${variant.sellingPrice}
+                </div>
+
+              `
+          }
 
           <svg
             class="barcode"
@@ -43,13 +71,21 @@ export function generateThermalTemplate({
             ${variant.barcode}
           </div>
 
-          <div class="sku">
-            SKU : ${variant.sku}
-          </div>
+          ${
+            !isLabel
+              ? `
+                <div class="sku">
+                  SKU : ${variant.sku}
+                </div>
+              `
+              : ""
+          }
 
         </div>
       `;
+
     }
+
   });
 
   html += `
@@ -57,4 +93,5 @@ export function generateThermalTemplate({
   `;
 
   return html;
+
 }
