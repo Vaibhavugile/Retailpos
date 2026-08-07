@@ -1,12 +1,16 @@
 export function generateA4Template({
   product,
+  variants,
   storeName,
-  copies,
 }) {
   let html = `<div class="a4-sheet">`;
 
-  product.variants.forEach((variant) => {
-    for (let i = 0; i < copies; i++) {
+variants.forEach((variant) => {
+  for (
+    let i = 0;
+    i < variant.printQty;
+    i++
+  ) {
       html += `
         <div class="a4-label">
 

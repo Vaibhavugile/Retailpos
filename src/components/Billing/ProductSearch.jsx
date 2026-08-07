@@ -2,7 +2,8 @@ import "./ProductSearch.css";
 import { useState, useRef, useEffect } from "react";
 import { parseSearchCode } from "../../utils/codeParser";
 import { searchProduct } from "../../services/productSearchService";
-
+import successSound from "../../assets/sounds/success.mp3";
+import errorSound from "../../assets/sounds/error.mp3";
 export default function ProductSearch({
   cart,
   setCart,
@@ -18,6 +19,8 @@ const focusBarcodeInput = () => {
 };
 const lastScanRef = useRef("");
 const lastScanTimeRef = useRef(0);
+const successAudio = useRef(new Audio(successSound));
+const errorAudio = useRef(new Audio(errorSound));
 useEffect(() => {
     focusBarcodeInput();
 }, []);
@@ -44,6 +47,10 @@ useEffect(() => {
     };
 
 }, []);
+useEffect(() => {
+  successAudio.current.volume = 0.6;
+  errorAudio.current.volume = 0.7;
+}, []);
   const handleSearch = async (value) => {
     if (loading) return;
 const code = value.trim().toUpperCase();
@@ -63,7 +70,9 @@ lastScanTimeRef.current = now;
 
   // Invalid or incomplete code
  if (!parsed.valid) {
+  errorAudio.current.currentTime = 0;
 
+  errorAudio.current.play().catch(() => {});
     setSearch(code);
 
     setSearchResult(null);
@@ -83,7 +92,8 @@ lastScanTimeRef.current = now;
     const result = await searchProduct(parsed.code);
 
    if (!result) {
-
+  errorAudio.current.currentTime = 0;
+  errorAudio.current.play().catch(() => {});
     setSearchResult(null);
 
     setSearchError(`No product found for "${parsed.code}"`);
@@ -114,7 +124,8 @@ setSearchError("");
 catch (error) {
 
     console.error(error);
-
+  errorAudio.current.currentTime = 0;
+  errorAudio.current.play().catch(() => {});
     setSearchResult(null);
 
     setSearchError("Something went wrong. Please try again.");
@@ -186,7 +197,9 @@ const addVariantToCart = (product, variant) => {
     ];
 
   });
+successAudio.current.currentTime = 0;
 
+successAudio.current.play().catch(() => {});
   // Ready for next product
   setSearch("");
 setSearchError("");

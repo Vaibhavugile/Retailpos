@@ -1,16 +1,25 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getProductById } from "../../services/productService";
+import { useNavigate, useParams } from "react-router-dom";
+
 import "./ViewProduct.css";
 
+import ProductHeader from "../../components/product/ProductHeader/ProductHeader";
+import ProductBasicInfo from "../../components/product/BasicInformation/BasicInformation";
+import ProductImages from "../../components/product/ProductImages/ProductImages";
+import ProductCategory from "../../components/product/ProductCategory/ProductCategory";
+import VariantGenerator from "../../components/product/VariantGenerator/VariantGenerator";
+import VariantTable from "../../components/product/VariantTable/VariantTable";
+import BarcodePrint from "../../components/barcode/BarcodePrint";
+
+import { getProductById } from "../../services/productService";
+
 export default function ViewProduct() {
+  const navigate = useNavigate();
   const { id } = useParams();
 
-  const [loading, setLoading] =
-    useState(true);
+  const [loading, setLoading] = useState(true);
 
-  const [product, setProduct] =
-    useState(null);
+  const [product, setProduct] = useState(null);
 
   useEffect(() => {
     loadProduct();
@@ -20,8 +29,7 @@ export default function ViewProduct() {
     try {
       setLoading(true);
 
-      const data =
-        await getProductById(id);
+      const data = await getProductById(id);
 
       setProduct(data);
     } catch (error) {
@@ -40,18 +48,47 @@ export default function ViewProduct() {
   }
 
   return (
-    <div className="view-product-page">
-      <h1>{product.name}</h1>
+    <div className="product-page">
 
-      <p>
-        Product Code :
-        {product.productCode}
-      </p>
+      <ProductHeader
+        productCode={product.productCode}
+      />
 
-      <p>
-        Category :
-        {product.categoryName}
-      </p>
+      <div>
+
+        <ProductBasicInfo
+          product={product}
+          setProduct={setProduct}
+        />
+
+        {/* <ProductImages
+          product={product}
+          setProduct={setProduct}
+        /> */}
+
+        <ProductCategory
+          product={product}
+          setProduct={setProduct}
+        />
+
+        <VariantGenerator
+          product={product}
+          setProduct={setProduct}
+        />
+
+        <VariantTable
+          product={product}
+          setProduct={setProduct}
+        />
+
+        <BarcodePrint
+          product={product}
+        />
+
+        
+
+      </div>
+
     </div>
   );
 }

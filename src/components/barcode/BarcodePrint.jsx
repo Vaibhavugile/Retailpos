@@ -14,12 +14,19 @@ export default function BarcodePrint({ product }) {
         🖨 Print Barcodes
       </button>
 
-      {open && (
-        <PrintDialog
-          product={product}
-          onClose={() => setOpen(false)}
-        />
-      )}
+     {open && (
+  <div
+    className="print-dialog-overlay"
+    onClick={() => setOpen(false)}
+  >
+    <div onClick={(e) => e.stopPropagation()}>
+      <PrintDialog
+        product={product}
+        onClose={() => setOpen(false)}
+      />
+    </div>
+  </div>
+)}
     </>
   );
 }

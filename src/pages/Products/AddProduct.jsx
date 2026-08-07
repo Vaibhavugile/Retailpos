@@ -134,10 +134,10 @@ const handleSaveProduct = async () => {
             PRODUCT IMAGES
         =========================================== */}
 
-        <ProductImages
+        {/* <ProductImages
           product={product}
           setProduct={setProduct}
-        />
+        /> */}
 
         {/* ===========================================
             CATEGORY

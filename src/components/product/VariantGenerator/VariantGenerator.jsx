@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./VariantGenerator.css";
+import { useLocation } from "react-router-dom";
 export default function VariantGenerator({
   product,
   setProduct,
@@ -8,7 +9,10 @@ export default function VariantGenerator({
   /* ===========================================
       DEFAULT CHIPS
   =========================================== */
+const location = useLocation();
 
+const isView =
+  location.pathname.startsWith("/products/view");
   const defaultColors = [
     "Black",
     "White",
@@ -378,7 +382,9 @@ setProduct((prev) => ({
 /* ===========================================
     PREVIEW VARIANTS
 =========================================== */
-
+if (isView) {
+  return null;
+}
   return (
   <div className="product-card">
 

@@ -3,7 +3,7 @@ import { generateThermalTemplate } from "../templates/ThermalTemplate";
 
 export function print58mm({
   product,
-  copies,
+  variants,
   storeName,
 }) {
 
@@ -19,11 +19,11 @@ export function print58mm({
   }
 
   const body = generateThermalTemplate({
-    product,
-    storeName,
-    copies,
-    paperWidth: "50x30",
-  });
+  product,
+  variants,
+  storeName,
+  paperWidth: "50x30",
+});
 
   printWindow.document.open();
 

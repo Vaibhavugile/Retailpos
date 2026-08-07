@@ -1,5 +1,6 @@
 import "./VariantTable.css";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 export default function VariantTable({
   product,
   setProduct,
@@ -14,6 +15,10 @@ const [bulk, setBulk] = useState({
   stock: "",
   lowStock: "",
 });
+const location = useLocation();
+
+const isView =
+  location.pathname.startsWith("/products/view");
 const updateVariant = (
   index,
   field,
@@ -36,7 +41,7 @@ const updateVariant = (
 =========================================== */
 
 const deleteVariant = (index) => {
-
+if (isView) return;
   const confirmed = window.confirm(
     "Are you sure you want to delete this variant?"
   );
@@ -58,6 +63,7 @@ const deleteVariant = (index) => {
 =========================================== */
 
 const applyToAll = (field) => {
+  if (isView) return;
   if (bulk[field] === "") return;
 
   const variants = product.variants.map((variant) => ({
@@ -155,6 +161,7 @@ const applyToAll = (field) => {
             type="number"
             className="table-input"
             value={variant.purchasePrice}
+              readOnly={isView}
             onChange={(e) =>
               updateVariant(
                 index,
@@ -172,6 +179,7 @@ const applyToAll = (field) => {
             type="number"
             className="table-input"
             value={variant.sellingPrice}
+              readOnly={isView}
             onChange={(e) =>
               updateVariant(
                 index,
@@ -189,6 +197,7 @@ const applyToAll = (field) => {
             type="number"
             className="table-input"
             value={variant.stock}
+              readOnly={isView}
             onChange={(e) =>
               updateVariant(
                 index,
@@ -206,6 +215,7 @@ const applyToAll = (field) => {
             type="number"
             className="table-input"
             value={variant.lowStock}
+              readOnly={isView}
             onChange={(e) =>
               updateVariant(
                 index,
@@ -223,6 +233,7 @@ const applyToAll = (field) => {
 
             <input
               type="checkbox"
+                disabled={isView}
               checked={variant.status}
               onChange={(e) =>
                 updateVariant(
@@ -244,15 +255,19 @@ const applyToAll = (field) => {
         </td>
         <td>
 
-  <button
-    type="button"
-    className="delete-variant-btn"
-    onClick={() =>
-      deleteVariant(index)
-    }
-  >
-    🗑
-  </button>
+{!isView && (
+
+<button
+type="button"
+className="delete-variant-btn"
+onClick={() =>
+deleteVariant(index)
+}
+>
+🗑
+</button>
+
+)}
 
 </td>
 
@@ -266,6 +281,7 @@ const applyToAll = (field) => {
         </table>
 
       </div>
+      {!isView && (
           <div className="bulk-update-card">
 
   <h3>Bulk Update</h3>
@@ -383,6 +399,7 @@ const applyToAll = (field) => {
   </div>
 
 </div>
+      )}
 
     </div>
   );

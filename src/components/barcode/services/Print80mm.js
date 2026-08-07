@@ -3,7 +3,7 @@ import { generateThermalTemplate } from "../templates/ThermalTemplate";
 
 export function print80mm({
   product,
-  copies,
+  variants,
   storeName,
 }) {
   const printWindow = window.open(
@@ -17,12 +17,12 @@ export function print80mm({
     return;
   }
 
-  const body = generateThermalTemplate({
-    product,
-    storeName,
-    copies,
-    paperWidth: "80mm",
-  });
+const body = generateThermalTemplate({
+  product,
+  variants,
+  storeName,
+  paperWidth: "80mm",
+});
 
   printWindow.document.open();
 

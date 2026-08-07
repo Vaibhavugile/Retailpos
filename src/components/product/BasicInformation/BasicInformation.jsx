@@ -1,17 +1,23 @@
 import "./BasicInformation.css";
-
+import { useLocation } from "react-router-dom";
 export default function BasicInformation({
   product,
   setProduct,
 }) {
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const location = useLocation();
 
-    setProduct((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+const isView =
+  location.pathname.startsWith("/products/view");
+  const handleChange = (e) => {
+  if (isView) return;
+
+  const { name, value } = e.target;
+
+  setProduct((prev) => ({
+    ...prev,
+    [name]: value,
+  }));
+};
 
   return (
     <div className="product-card">
@@ -36,12 +42,13 @@ export default function BasicInformation({
           </label>
 
           <input
-            type="text"
-            name="name"
-            placeholder="Enter product name"
-            value={product.name}
-            onChange={handleChange}
-          />
+  type="text"
+  name="name"
+  placeholder="Enter product name"
+  value={product.name}
+  onChange={handleChange}
+  readOnly={isView}
+/>
 
         </div>
 
@@ -52,12 +59,13 @@ export default function BasicInformation({
           </label>
 
           <textarea
-            rows="5"
-            name="description"
-            placeholder="Write product description..."
-            value={product.description}
-            onChange={handleChange}
-          />
+  rows="5"
+  name="description"
+  placeholder="Write product description..."
+  value={product.description}
+  onChange={handleChange}
+  readOnly={isView}
+/>
 
         </div>
 

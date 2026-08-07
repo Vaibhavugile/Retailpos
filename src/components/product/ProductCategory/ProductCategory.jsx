@@ -8,11 +8,15 @@ import {
 import {
   subscribeSubCategories,
 } from "../../../services/subCategoryService";
-
+import { useLocation } from "react-router-dom";
 export default function ProductCategory({
   product,
   setProduct,
 }) {
+  const location = useLocation();
+
+const isView =
+  location.pathname.startsWith("/products/view");
   const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
 
@@ -56,6 +60,7 @@ export default function ProductCategory({
   =========================================== */
 
   const handleCategory = (e) => {
+      if (isView) return;
     const id = e.target.value;
 
     const selected = categories.find(
@@ -81,6 +86,7 @@ export default function ProductCategory({
   =========================================== */
 
   const handleSubCategory = (e) => {
+      if (isView) return;
     const id = e.target.value;
 
     const selected =
@@ -126,9 +132,10 @@ export default function ProductCategory({
             </label>
 
             <select
-              value={product.categoryId}
-              onChange={handleCategory}
-            >
+  value={product.categoryId}
+  onChange={handleCategory}
+  disabled={isView}
+>
               <option value="">
                 Select Category
               </option>
@@ -155,10 +162,10 @@ export default function ProductCategory({
             </label>
 
             <select
-              value={product.subCategoryId}
-              onChange={handleSubCategory}
-              disabled={!product.categoryId}
-            >
+  value={product.subCategoryId}
+  onChange={handleSubCategory}
+  disabled={isView || !product.categoryId}
+>
               <option value="">
                 Select Sub Category
               </option>

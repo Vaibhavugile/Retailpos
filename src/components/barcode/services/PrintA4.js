@@ -3,7 +3,7 @@ import { generateA4Template } from "../templates/A4Template";
 
 export function printA4({
   product,
-  copies,
+  variants,
   storeName,
 }) {
 
@@ -18,12 +18,12 @@ export function printA4({
     return;
   }
 
-  const body =
-    generateA4Template({
-      product,
-      storeName,
-      copies,
-    });
+ 
+  const body = generateA4Template({
+    product,
+    variants,
+    storeName,
+  });
 
   printWindow.document.open();
 

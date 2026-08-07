@@ -1,7 +1,7 @@
 export function generateThermalTemplate({
   product,
+  variants,
   storeName,
-  copies,
   paperWidth = "80mm",
 }) {
 
@@ -17,9 +17,13 @@ export function generateThermalTemplate({
     <div class="${sheetClass}">
   `;
 
-  product.variants.forEach((variant) => {
+ variants.forEach((variant) => {
 
-    for (let i = 0; i < copies; i++) {
+  for (
+    let i = 0;
+    i < variant.printQty;
+    i++
+  ) {
 
       html += `
         <div class="label">
@@ -91,7 +95,7 @@ export function generateThermalTemplate({
   html += `
     </div>
   `;
-
+console.log(html);
   return html;
 
 }
