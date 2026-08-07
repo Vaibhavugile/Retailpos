@@ -373,3 +373,34 @@ export const deleteProduct = async (
     throw error;
   }
 };
+/* ===========================================
+GET PRODUCT BY ID
+=========================================== */
+
+export const getProductById = async (
+  productId
+) => {
+  try {
+    const productRef = doc(
+      db,
+      "products",
+      productId
+    );
+
+    const snapshot = await getDoc(
+      productRef
+    );
+
+    if (!snapshot.exists()) {
+      return null;
+    }
+
+    return {
+      id: snapshot.id,
+      ...snapshot.data(),
+    };
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};

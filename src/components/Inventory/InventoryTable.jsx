@@ -1,5 +1,5 @@
 import "./InventoryTable.css";
-
+import { useNavigate } from "react-router-dom";
 export default function InventoryTable({
   products,
   search,
@@ -8,7 +8,7 @@ export default function InventoryTable({
   /* ===========================================
       FILTER PRODUCTS
   =========================================== */
-
+const navigate = useNavigate();
   const filteredProducts = products.filter(
     (product) => {
 
@@ -183,12 +183,15 @@ export default function InventoryTable({
 
                 <td>
 
-                  <button
-                    type="button"
-                    title="View Product"
-                  >
-                    👁
-                  </button>
+                 <button
+  type="button"
+  title="View Product"
+  onClick={() =>
+    navigate(`/products/view/${product.id}`)
+  }
+>
+  👁
+</button>
 
                   <button
                     type="button"
