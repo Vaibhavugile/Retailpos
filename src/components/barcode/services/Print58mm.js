@@ -6,6 +6,10 @@ export function print58mm({
   variants,
   storeName,
 }) {
+  // =========================================================
+  // GENERATE LABEL HTML
+  // =========================================================
+
   const body = generateThermalTemplate({
     product,
     variants,
@@ -13,234 +17,387 @@ export function print58mm({
     paperWidth: "50x30",
   });
 
-  // Remove any previous print container
-  const oldContainer =
-    document.getElementById("barcode-print-container");
+  // =========================================================
+  // OPEN CLEAN PRINT WINDOW
+  // =========================================================
 
-  if (oldContainer) {
-    oldContainer.remove();
-  }
-
-  // Create hidden print container
-  const printContainer =
-    document.createElement("div");
-
-  printContainer.id =
-    "barcode-print-container";
-
-  printContainer.innerHTML = body;
-
-  document.body.appendChild(
-    printContainer
+  const printWindow = window.open(
+    "",
+    "_blank",
+    "width=600,height=800"
   );
 
-  // Add print styles
-  const style =
-    document.createElement("style");
+  if (!printWindow) {
+    alert(
+      "Unable to open print window. Please allow popups for this website."
+    );
+    return;
+  }
 
-  style.id =
-    "barcode-print-styles";
+  // =========================================================
+  // PRINT DOCUMENT
+  // =========================================================
 
-  style.innerHTML = `
-    /* ==========================================
-                NORMAL SCREEN
-    ========================================== */
+  printWindow.document.open();
 
-    #barcode-print-container {
-      display: none;
+  printWindow.document.write(`
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>50x30 Barcode Labels</title>
+
+<style>
+
+  /* =====================================================
+     PAGE
+  ===================================================== */
+
+  @page {
+    size: 50mm 30mm;
+    margin: 0;
+  }
+
+
+  /* =====================================================
+     RESET
+  ===================================================== */
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+
+  html,
+  body {
+    width: 50mm;
+    min-width: 50mm;
+    max-width: 50mm;
+
+    margin: 0;
+    padding: 0;
+
+    background: #ffffff;
+
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+
+  /* =====================================================
+     PRINT CONTENT
+  ===================================================== */
+
+  .sheet-50x30 {
+    width: 50mm;
+    margin: 0;
+    padding: 0;
+  }
+
+
+  /* =====================================================
+     SINGLE LABEL
+  ===================================================== */
+
+  .label {
+    width: 50mm;
+    height: 30mm;
+
+    min-width: 50mm;
+    max-width: 50mm;
+
+    min-height: 30mm;
+    max-height: 30mm;
+
+    margin: 0;
+    padding: 1mm;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-evenly;
+
+    align-items: center;
+
+    text-align: center;
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: none;
+
+    page-break-after: always;
+    break-after: page;
+
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+
+  /* Last label should not create another page */
+
+  .label:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+
+  /* =====================================================
+     STORE NAME
+  ===================================================== */
+
+  .store {
+    width: 100%;
+
+    margin: 0;
+
+    font-size: 11px;
+
+    line-height: 1;
+
+    font-weight: 700;
+
+    text-align: center;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+  }
+
+
+  /* =====================================================
+     VARIANT + PRICE
+  ===================================================== */
+
+  .label-top {
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: row;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 2mm;
+  }
+
+
+  .variant {
+    flex: 1;
+
+    min-width: 0;
+
+    text-align: left;
+
+    font-size: 9px;
+
+    line-height: 1;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+  }
+
+
+  .price {
+    flex-shrink: 0;
+
+    margin: 0;
+
+    font-size: 15px;
+
+    line-height: 1;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+  }
+
+
+  /* =====================================================
+     PRODUCT
+  ===================================================== */
+
+  .product {
+    width: 100%;
+
+    margin: 0;
+
+    text-align: center;
+
+    font-size: 8px;
+
+    line-height: 1;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+  }
+
+
+  /* =====================================================
+     BARCODE
+  ===================================================== */
+
+  .barcode {
+    display: block;
+
+    width: 47mm !important;
+
+    max-width: 47mm !important;
+
+    height: 12mm !important;
+
+    max-height: 12mm !important;
+
+    margin: 0 auto !important;
+
+    padding: 0;
+
+  }
+
+
+  /* =====================================================
+     BARCODE NUMBER
+  ===================================================== */
+
+  .barcode-number {
+    width: 100%;
+
+    margin: 0;
+
+    text-align: center;
+
+    font-size: 7px;
+
+    line-height: 1;
+
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+  }
+
+
+  /* =====================================================
+     SKU
+  ===================================================== */
+
+  .sku {
+    display: none;
+  }
+
+
+  /* =====================================================
+     PRINT
+  ===================================================== */
+
+  @media print {
+
+    @page {
+      size: 50mm 30mm;
+      margin: 0;
     }
 
-    /* ==========================================
-                PRINT
-    ========================================== */
-
-    @media print {
-
-      @page {
-        size: 50mm 30mm;
-        margin: 0;
-      }
-
-      /*
-       * Hide the entire application
-       */
-      body > * {
-        display: none !important;
-      }
-
-      /*
-       * Show only barcode container
-       */
-      body {
-        margin: 0 !important;
-        padding: 0 !important;
-        width: 50mm !important;
-        background: #ffffff !important;
-      }
-
-      #barcode-print-container {
-        display: block !important;
-
-        width: 50mm !important;
-
-        margin: 0 !important;
-        padding: 0 !important;
-      }
-
-      /*
-       * Label
-       */
-      #barcode-print-container .label {
-        width: 50mm !important;
-        height: 30mm !important;
-
-        padding: 1mm !important;
-
-        display: flex !important;
-        flex-direction: column !important;
-
-        justify-content: space-evenly !important;
-        align-items: center !important;
-
-        text-align: center !important;
-
-        overflow: hidden !important;
-
-        border: none !important;
-        box-shadow: none !important;
-
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
-      }
-
-      /*
-       * Every label gets its own page
-       */
-      #barcode-print-container
-        .label:not(:last-child) {
-
-        page-break-after: always !important;
-        break-after: page !important;
-      }
-
-      /*
-       * Store
-       */
-      #barcode-print-container .store {
-        width: 100%;
-
-        font-size: 11px;
-        font-weight: 700;
-
-        line-height: 1;
-
-        text-align: center;
-      }
-
-      /*
-       * Variant + price
-       */
-      #barcode-print-container .label-top {
-        width: 100%;
-
-        display: flex;
-
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      #barcode-print-container .variant {
-        flex: 1;
-
-        text-align: left;
-
-        font-size: 9px;
-        font-weight: 600;
-
-        overflow: hidden;
-
-        white-space: nowrap;
-
-        text-overflow: ellipsis;
-      }
-
-      #barcode-print-container .price {
-        margin-left: 2mm;
-
-        font-size: 15px;
-        font-weight: 700;
-
-        white-space: nowrap;
-      }
-
-      /*
-       * Product
-       */
-      #barcode-print-container .product {
-        width: 100%;
-
-        text-align: center;
-
-        font-size: 8px;
-        font-weight: 600;
-
-        overflow: hidden;
-
-        white-space: nowrap;
-
-        text-overflow: ellipsis;
-      }
-
-      /*
-       * Barcode
-       */
-      #barcode-print-container .barcode {
-        width: 48mm !important;
-        height: 13mm !important;
-
-        display: block !important;
-
-        margin: 1mm auto !important;
-      }
-
-      /*
-       * Barcode number
-       */
-      #barcode-print-container .barcode-number {
-        width: 100%;
-
-        text-align: center;
-
-        font-size: 7px;
-        font-weight: 700;
-
-        letter-spacing: .5px;
-      }
-
-      #barcode-print-container .sku {
-        display: none;
-      }
+    html {
+      width: 50mm;
+      margin: 0;
+      padding: 0;
     }
-  `;
 
-  document.head.appendChild(style);
+    body {
+      width: 50mm;
+      min-width: 50mm;
+      max-width: 50mm;
 
-  /*
-   * Generate SVG barcodes
-   */
+      margin: 0;
+      padding: 0;
+
+      background: #ffffff;
+    }
+
+    .sheet-50x30 {
+      width: 50mm;
+      margin: 0;
+      padding: 0;
+    }
+
+    .label {
+      width: 50mm;
+      height: 30mm;
+
+      min-width: 50mm;
+      max-width: 50mm;
+
+      min-height: 30mm;
+      max-height: 30mm;
+
+      margin: 0;
+      padding: 1mm;
+
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .label:last-child {
+      page-break-after: auto;
+      break-after: auto;
+    }
+  }
+
+</style>
+
+</head>
+
+<body>
+
+${body}
+
+</body>
+
+</html>
+  `);
+
+  printWindow.document.close();
+
+
+  // =========================================================
+  // GENERATE BARCODES
+  // =========================================================
+
   const generateBarcodes = () => {
     const svgs =
-      printContainer.querySelectorAll(
+      printWindow.document.querySelectorAll(
         "svg.barcode"
       );
 
     svgs.forEach((svg) => {
       const barcode =
-        svg.getAttribute(
-          "data-barcode"
-        );
+        svg.getAttribute("data-barcode");
 
-      if (!barcode) return;
+      if (!barcode) {
+        return;
+      }
 
       try {
         JsBarcode(
@@ -251,7 +408,7 @@ export function print58mm({
 
             width: 2,
 
-            height: 50,
+            height: 45,
 
             margin: 0,
 
@@ -281,32 +438,56 @@ export function print58mm({
       }
     });
 
-    /*
-     * Give browser a moment to render
-     * the SVG before opening print dialog.
-     */
+
+    // =======================================================
+    // WAIT FOR SVG RENDER
+    // =======================================================
+
     setTimeout(() => {
-      window.print();
+
+      printWindow.focus();
+
+      printWindow.print();
+
+    }, 500);
+  };
+
+
+  // =========================================================
+  // WAIT FOR DOCUMENT
+  // =========================================================
+
+  if (
+    printWindow.document.readyState ===
+    "complete"
+  ) {
+    generateBarcodes();
+  } else {
+
+    printWindow.onload =
+      generateBarcodes;
+
+  }
+
+
+  // =========================================================
+  // CLOSE WINDOW AFTER PRINT
+  // =========================================================
+
+  printWindow.onafterprint = () => {
+
+    setTimeout(() => {
+
+      try {
+        printWindow.close();
+      } catch (error) {
+        console.error(
+          "Print window close error:",
+          error
+        );
+      }
+
     }, 300);
+
   };
-
-  generateBarcodes();
-
-  /*
-   * Cleanup after printing.
-   */
-  const cleanup = () => {
-    printContainer.remove();
-    style.remove();
-
-    window.removeEventListener(
-      "afterprint",
-      cleanup
-    );
-  };
-
-  window.addEventListener(
-    "afterprint",
-    cleanup
-  );
 }
