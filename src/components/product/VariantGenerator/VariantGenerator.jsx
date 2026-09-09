@@ -31,6 +31,10 @@ const isView =
     "L",
     "XL",
     "XXL",
+    "30",
+    "32",
+    "34",
+    "36",
   ];
 
   /* ===========================================
@@ -247,7 +251,7 @@ const generateVariants = () => {
 
   const existingVariants = product.variants || [];
 
-  const combinations = previewVariants;
+  let combinations = previewVariants;
 
   // No Color & No Size
   if (!colors.length && !sizes.length) {

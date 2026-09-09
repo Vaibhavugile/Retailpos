@@ -92,7 +92,7 @@ const handleSaveProduct = async () => {
       `Product ${productCode} created successfully.`
     );
 
-    navigate("/products");
+    
 
   } catch (error) {
 

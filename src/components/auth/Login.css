@@ -891,3 +891,965 @@ transform:scaleY(1.05);
 }
 
 }
+/* =========================================================
+   PREMIUM RESPONSIVE LOGIN
+========================================================= */
+
+
+/* =========================================================
+   GLOBAL MOBILE SAFETY
+========================================================= */
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+========================================================= */
+
+@media (min-width: 1200px) {
+
+  .login-card {
+    max-width: 1180px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET / SMALL LAPTOP
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .login-container {
+    padding: 30px;
+  }
+
+  .login-card {
+    width: 100%;
+    max-width: 1000px;
+    min-height: auto;
+  }
+
+  .login-left {
+    padding: 50px 40px;
+  }
+
+  .login-right {
+    padding: 50px 40px;
+  }
+
+  .logo-title {
+    font-size: 44px !important;
+  }
+
+  .logo-subtitle {
+    font-size: 16px !important;
+    margin-bottom: 40px !important;
+  }
+
+  .welcome-title {
+    font-size: 40px !important;
+  }
+
+  .welcome-subtitle {
+    font-size: 15px !important;
+  }
+
+  .dashboard-preview {
+    max-width: 310px;
+    gap: 14px;
+    margin-bottom: 35px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+
+  .login-page {
+    min-height: 100svh;
+    align-items: flex-start;
+  }
+
+  .login-container {
+    width: 100%;
+    min-height: 100svh;
+
+    padding: 24px;
+
+    align-items: center;
+  }
+
+  .login-card {
+    width: 100%;
+    max-width: 620px;
+
+    min-height: auto;
+
+    flex-direction: column;
+
+    border-radius: 26px;
+  }
+
+
+  /* ---------------------------------------------
+     LEFT
+  --------------------------------------------- */
+
+  .login-left {
+    width: 100%;
+
+    min-height: auto;
+
+    padding: 42px 35px 35px;
+
+    text-align: center;
+  }
+
+  .logo-title {
+    font-size: 42px !important;
+    letter-spacing: -1.5px;
+  }
+
+  .logo-subtitle {
+    max-width: 500px;
+
+    margin-bottom: 28px !important;
+
+    font-size: 15px !important;
+
+    line-height: 1.6;
+  }
+
+
+  /* ---------------------------------------------
+     PREVIEW
+  --------------------------------------------- */
+
+  .dashboard-preview {
+    width: 100%;
+
+    max-width: 500px;
+
+    margin-bottom: 25px;
+
+    gap: 12px;
+  }
+
+  .preview-card {
+    padding: 18px;
+
+    border-radius: 16px;
+  }
+
+  .preview-value {
+    font-size: 28px !important;
+  }
+
+  .preview-row {
+    gap: 12px;
+  }
+
+  .small-card {
+    padding: 16px;
+
+    border-radius: 15px;
+  }
+
+  .small-value {
+    font-size: 22px !important;
+  }
+
+  .graph-card {
+    padding: 16px;
+
+    border-radius: 15px;
+  }
+
+  .graph-bars {
+    height: 80px;
+  }
+
+  .graph-bars span {
+    width: 18px;
+  }
+
+  .graph-bars span:nth-child(1) {
+    height: 35px;
+  }
+
+  .graph-bars span:nth-child(2) {
+    height: 55px;
+  }
+
+  .graph-bars span:nth-child(3) {
+    height: 45px;
+  }
+
+  .graph-bars span:nth-child(4) {
+    height: 75px;
+  }
+
+  .graph-bars span:nth-child(5) {
+    height: 50px;
+  }
+
+  .graph-bars span:nth-child(6) {
+    height: 65px;
+  }
+
+  .graph-bars span:nth-child(7) {
+    height: 42px;
+  }
+
+
+  .left-bottom-text {
+    font-size: 13px !important;
+  }
+
+
+  /* ---------------------------------------------
+     RIGHT
+  --------------------------------------------- */
+
+  .login-right {
+    width: 100%;
+
+    padding: 42px 35px 45px;
+  }
+
+  .welcome-title {
+    font-size: 38px !important;
+  }
+
+  .welcome-subtitle {
+    font-size: 14px !important;
+
+    line-height: 1.6;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .login-page {
+    min-height: 100svh;
+
+    align-items: flex-start;
+
+    background:
+      radial-gradient(
+        circle at 0% 0%,
+        rgba(91, 95, 239, 0.15),
+        transparent 35%
+      ),
+      radial-gradient(
+        circle at 100% 100%,
+        rgba(6, 182, 212, 0.10),
+        transparent 35%
+      ),
+      #08090d;
+  }
+
+
+  .login-container {
+
+    width: 100%;
+
+    min-height: 100svh;
+
+    padding: 14px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: center;
+  }
+
+
+  .login-card {
+
+    width: 100%;
+
+    max-width: 100%;
+
+    min-height: auto;
+
+    margin: 0;
+
+    border-radius: 22px;
+
+    flex-direction: column;
+
+    background:
+      rgba(18, 22, 34, 0.94);
+
+    box-shadow:
+      0 25px 60px rgba(0, 0, 0, 0.45);
+
+    transform: none !important;
+  }
+
+
+  /* =====================================================
+     MOBILE LEFT
+  ===================================================== */
+
+  .login-left {
+
+    width: 100%;
+
+    padding: 32px 20px 24px;
+
+    border-radius: 22px 22px 0 0;
+
+    min-height: auto;
+  }
+
+
+  .logo-title {
+
+    font-size: 34px !important;
+
+    line-height: 1.1;
+
+    letter-spacing: -1px;
+
+    margin-bottom: 8px !important;
+  }
+
+
+  .logo-subtitle {
+
+    max-width: 300px;
+
+    margin: 0 auto 22px !important;
+
+    font-size: 12px !important;
+
+    line-height: 1.5;
+  }
+
+
+  /* =====================================================
+     MOBILE DASHBOARD PREVIEW
+  ===================================================== */
+
+  .dashboard-preview {
+
+    width: 100%;
+
+    max-width: 340px;
+
+    margin: 0 auto 20px;
+
+    gap: 9px;
+  }
+
+
+  .preview-card {
+
+    padding: 14px 16px;
+
+    border-radius: 14px;
+  }
+
+
+  .preview-title {
+
+    font-size: 11px !important;
+  }
+
+
+  .preview-value {
+
+    margin-top: 5px !important;
+
+    font-size: 23px !important;
+
+    letter-spacing: -0.5px;
+  }
+
+
+  .preview-row {
+
+    width: 100%;
+
+    gap: 9px;
+  }
+
+
+  .small-card {
+
+    padding: 13px;
+
+    border-radius: 13px;
+  }
+
+
+  .small-label {
+
+    font-size: 10px !important;
+  }
+
+
+  .small-value {
+
+    margin-top: 5px !important;
+
+    font-size: 18px !important;
+  }
+
+
+  .graph-card {
+
+    padding: 13px;
+
+    border-radius: 13px;
+  }
+
+
+  .graph-title {
+
+    margin-bottom: 10px !important;
+
+    font-size: 11px !important;
+  }
+
+
+  .graph-bars {
+
+    height: 58px;
+
+    gap: 6px;
+  }
+
+
+  .graph-bars span {
+
+    width: 12px;
+
+    border-radius: 10px;
+  }
+
+
+  .graph-bars span:nth-child(1) {
+    height: 25px;
+  }
+
+  .graph-bars span:nth-child(2) {
+    height: 40px;
+  }
+
+  .graph-bars span:nth-child(3) {
+    height: 32px;
+  }
+
+  .graph-bars span:nth-child(4) {
+    height: 55px;
+  }
+
+  .graph-bars span:nth-child(5) {
+    height: 38px;
+  }
+
+  .graph-bars span:nth-child(6) {
+    height: 47px;
+  }
+
+  .graph-bars span:nth-child(7) {
+    height: 30px;
+  }
+
+
+  .left-bottom-text {
+
+    display: none;
+
+  }
+
+
+  /* =====================================================
+     MOBILE RIGHT
+  ===================================================== */
+
+  .login-right {
+
+    width: 100%;
+
+    padding: 28px 20px 25px;
+
+    display: block;
+  }
+
+
+  .welcome-title {
+
+    font-size: 28px !important;
+
+    line-height: 1.2;
+
+    letter-spacing: -0.6px;
+
+    margin-bottom: 7px !important;
+  }
+
+
+  .welcome-subtitle {
+
+    font-size: 12px !important;
+
+    line-height: 1.55;
+
+    color: #9ca3af;
+
+    margin-bottom: 0 !important;
+  }
+
+
+  /* =====================================================
+     MUI STACK
+  ===================================================== */
+
+  .login-right .MuiStack-root {
+
+    margin-top: 24px !important;
+
+    gap: 16px !important;
+  }
+
+
+  /* =====================================================
+     INPUTS
+  ===================================================== */
+
+  .MuiTextField-root {
+
+    width: 100% !important;
+  }
+
+
+  .MuiOutlinedInput-root {
+
+    height: 56px;
+
+    border-radius: 15px !important;
+  }
+
+
+  .MuiInputLabel-root {
+
+    font-size: 13px !important;
+  }
+
+
+  .MuiOutlinedInput-input {
+
+    font-size: 14px;
+
+    padding: 15px 12px;
+
+  }
+
+
+  .MuiInputAdornment-root svg {
+
+    font-size: 20px;
+
+  }
+
+
+  /* =====================================================
+     REMEMBER / FORGOT
+  ===================================================== */
+
+  .login-right .MuiBox-root {
+
+    max-width: 100%;
+  }
+
+
+  .MuiFormControlLabel-root {
+
+    margin-left: -7px !important;
+  }
+
+
+  .MuiFormControlLabel-label {
+
+    font-size: 11px !important;
+  }
+
+
+  .forgot-password {
+
+    font-size: 11px;
+
+    white-space: nowrap;
+  }
+
+
+  /* =====================================================
+     LOGIN BUTTON
+  ===================================================== */
+
+  .login-button {
+
+    width: 100% !important;
+
+    height: 55px !important;
+
+    border-radius: 15px !important;
+
+    font-size: 14px !important;
+
+    box-shadow:
+      0 12px 30px rgba(99, 102, 241, 0.28);
+  }
+
+
+  .login-button:hover {
+
+    transform: none;
+
+  }
+
+
+  /* =====================================================
+     SIGNUP
+  ===================================================== */
+
+  .login-right .MuiTypography-alignCenter {
+
+    font-size: 12px;
+
+  }
+
+
+  .signup-link {
+
+    font-size: 12px;
+
+  }
+
+
+  /* =====================================================
+     SECURITY MESSAGE
+  ===================================================== */
+
+  .login-right .MuiBox-root[style] {
+
+    padding: 12px !important;
+
+    border-radius: 13px !important;
+
+  }
+
+
+  /* =====================================================
+     ALERT
+  ===================================================== */
+
+  .MuiAlert-root {
+
+    border-radius: 12px !important;
+
+    font-size: 12px !important;
+
+    padding: 8px 12px !important;
+
+  }
+
+
+  /* =====================================================
+     SNACKBAR
+  ===================================================== */
+
+  .MuiSnackbar-root {
+
+    left: 12px !important;
+
+    right: 12px !important;
+
+    bottom: 14px !important;
+
+  }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES - 390px
+========================================================= */
+
+@media (max-width: 390px) {
+
+  .login-container {
+
+    padding: 10px;
+
+  }
+
+
+  .login-card {
+
+    border-radius: 19px;
+
+  }
+
+
+  .login-left {
+
+    padding: 27px 16px 20px;
+
+  }
+
+
+  .logo-title {
+
+    font-size: 30px !important;
+
+  }
+
+
+  .logo-subtitle {
+
+    font-size: 11px !important;
+
+    max-width: 280px;
+
+    margin-bottom: 18px !important;
+
+  }
+
+
+  .dashboard-preview {
+
+    max-width: 300px;
+
+  }
+
+
+  .preview-card {
+
+    padding: 12px;
+
+  }
+
+
+  .preview-value {
+
+    font-size: 21px !important;
+
+  }
+
+
+  .small-card {
+
+    padding: 11px;
+
+  }
+
+
+  .small-value {
+
+    font-size: 16px !important;
+
+  }
+
+
+  .graph-card {
+
+    padding: 11px;
+
+  }
+
+
+  .login-right {
+
+    padding: 24px 16px 22px;
+
+  }
+
+
+  .welcome-title {
+
+    font-size: 25px !important;
+
+  }
+
+
+  .welcome-subtitle {
+
+    font-size: 11px !important;
+
+  }
+
+
+  .login-right .MuiStack-root {
+
+    margin-top: 20px !important;
+
+    gap: 14px !important;
+
+  }
+
+
+  .MuiOutlinedInput-root {
+
+    height: 53px;
+
+  }
+
+
+  .login-button {
+
+    height: 53px !important;
+
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 350px) {
+
+  .login-container {
+
+    padding: 7px;
+
+  }
+
+
+  .login-left {
+
+    padding: 24px 13px 18px;
+
+  }
+
+
+  .logo-title {
+
+    font-size: 27px !important;
+
+  }
+
+
+  .logo-subtitle {
+
+    font-size: 10px !important;
+
+  }
+
+
+  .dashboard-preview {
+
+    max-width: 275px;
+
+  }
+
+
+  .graph-card {
+
+    display: none;
+
+  }
+
+
+  .login-right {
+
+    padding: 21px 13px 20px;
+
+  }
+
+
+  .welcome-title {
+
+    font-size: 23px !important;
+
+  }
+
+
+  .MuiFormControlLabel-label {
+
+    font-size: 10px !important;
+
+  }
+
+
+  .forgot-password {
+
+    font-size: 10px;
+
+  }
+
+}
+
+
+/* =========================================================
+   REDUCE MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .login-page::before,
+  .login-page::after,
+  .graph-bars span,
+  .left-image img {
+
+    animation: none !important;
+
+  }
+
+
+  * {
+
+    scroll-behavior: auto !important;
+
+    transition-duration: 0.01ms !important;
+
+  }
+
+}
+
+
+/* =========================================================
+   SAFE AREA - MOBILE DEVICES
+========================================================= */
+
+@supports (padding: env(safe-area-inset-bottom)) {
+
+  .login-container {
+
+    padding-bottom:
+      calc(
+        14px + env(safe-area-inset-bottom)
+      );
+
+  }
+
+}

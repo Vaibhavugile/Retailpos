@@ -22,7 +22,15 @@ const lastScanTimeRef = useRef(0);
 const successAudio = useRef(new Audio(successSound));
 const errorAudio = useRef(new Audio(errorSound));
 useEffect(() => {
+
+  const timer = setTimeout(() => {
+
     focusBarcodeInput();
+
+  }, 200);
+
+  return () => clearTimeout(timer);
+
 }, []);
 useEffect(() => {
 
@@ -227,36 +235,41 @@ lastScanRef.current = "";
       </div>
 
   <input
-    ref={searchRef}
-    type="text"
-    className="product-search-input"
-    placeholder="Enter Product Code or Scan Barcode"
-    value={search}
-    autoComplete="off"
-    autoFocus
-    onChange={(e) => {
+  ref={searchRef}
+  type="text"
+  className="product-search-input"
+  placeholder="Enter Product Code or Scan Barcode"
+  value={search}
+  autoComplete="off"
+  autoFocus
+  tabIndex={0}
+  spellCheck={false}
+  onClick={focusBarcodeInput}
+  onFocus={() => console.log("✅ Barcode input focused")}
+  onBlur={() => console.log("❌ Barcode input lost focus")}
+  onChange={(e) => {
 
-        const value = e.target.value.toUpperCase();
+    const value = e.target.value.toUpperCase();
 
-        setSearch(value);
-        setSearchError("");
+    setSearch(value);
+    setSearchError("");
 
-        if (searchResult) {
-            setSearchResult(null);
-        }
+    if (searchResult) {
+      setSearchResult(null);
+    }
 
-    }}
-    onKeyDown={(e) => {
+  }}
+  onKeyDown={(e) => {
 
-        if (e.key === "Enter") {
+    if (e.key === "Enter") {
 
-            e.preventDefault();
+      e.preventDefault();
 
-            handleSearch(search);
+      handleSearch(search);
 
-        }
+    }
 
-    }}
+  }}
 />
 
       <div className="product-results">

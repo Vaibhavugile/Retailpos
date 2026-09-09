@@ -7,12 +7,12 @@ export default function PrintDialog({
   onClose,
 }) {
   const [format, setFormat] =
-    useState("80mm");
+    useState("58mm");
 
   
 
   const [storeName, setStoreName] =
-    useState("YOUR STORE");
+    useState("Jamale Collection");
 const [variants, setVariants] = useState(() =>
   (product.variants || []).map((variant) => ({
     ...variant,
@@ -341,7 +341,7 @@ const totalLabels = variants.reduce(
       </button>
 
       <button
-        className="print-btn"
+        className="reset-btn"
         disabled={totalLabels === 0}
         onClick={handlePrint}
       >
